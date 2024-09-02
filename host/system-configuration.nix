@@ -16,7 +16,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  time.timeZone = "Canada/Easter";
+  time.timeZone = "Canada/Eastern";
 
   environment.systemPackages = with pkgs; [
     wget
