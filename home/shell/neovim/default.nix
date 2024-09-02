@@ -1,8 +1,8 @@
-{pkgs,...}:
+{ inputs, pkgs, ... }:
 {
   programs.neovim = {
     enable = true;
-    defaultEditor = true;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
       nixd
       nixfmt-rfc-style
@@ -10,10 +10,13 @@
       cmake
       gcc
       clang
-      nodejs
       deadnix
       statix
     ];
+
+    defaultEditor = true;
+    withPython3 = true;
+    withNodeJs = true;
   };
 
   xdg.configFile.nvim = {

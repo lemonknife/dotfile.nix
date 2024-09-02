@@ -2,13 +2,12 @@
   description = "Lemonife's config";
 
   nixConfig = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-    ];
+    extra-substituters = [ "https://nix-community.cachix.org" ];
   };
-  
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,36 +19,44 @@
     grub2-themes.url = "github:vinceliuice/grub2-themes";
   };
 
-  outputs = inputs @ {
-    self,nixpkgs,home-manager, nixos-cosmic,...   
-  }:{
-    nixosConfigurations = {
-      lemon = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-	modules = [
-	  ./host
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      nixos-cosmic,
+      ...
+    }:
+    {
+      nixosConfigurations = {
+        lemon = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./host
 
-	  home-manager.nixosModules.home-manager
-	  {
-	    home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-	    home-manager.extraSpecialArgs = inputs;
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit inputs;};
 
-	    home-manager.users.lemon = import ./home;
-	  }
+              home-manager.users.lemon = import ./home;
+            }
 
-          inputs.grub2-themes.nixosModules.default
+            inputs.grub2-themes.nixosModules.default
 
-	  {
-            nix.settings = {
-              substituters = [ "https://cosmic.cachix.org/" ];
-              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-            };
-          }
-          nixos-cosmic.nixosModules.default
-	];
+            {
+              nix.settings = {
+                substituters = [ "https://cosmic.cachix.org/" ];
+                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              };
+            }
+            nixos-cosmic.nixosModules.default
+          ];
+        };
       };
     };
-  };
 }

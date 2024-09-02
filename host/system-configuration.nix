@@ -1,8 +1,11 @@
-{ pkgs, lib,...}:
+{ pkgs, lib, ... }:
 {
   nix.settings = {
-    trusted-users = ["lemon"];
-    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "lemon" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   nix.gc = {
@@ -15,11 +18,10 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  environment.systemPackages = with pkgs;[
+  environment.systemPackages = with pkgs; [
     wget
     curl
     git
-    neovim
     vim
   ];
 
@@ -38,8 +40,16 @@
 
   programs.nix-ld = {
     enable = true;
-    libraries = with pkgs;[
-      stdenv.cc.cc
-    ];
+    libraries = with pkgs; [ stdenv.cc.cc ];
+  };
+
+  programs.bash = {
+    interactiveShellInit = ''
+      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
+    '';
   };
 }
