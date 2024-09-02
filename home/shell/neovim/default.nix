@@ -7,6 +7,7 @@
       nixd
       nixfmt-rfc-style
       unzip
+      gnumake
       cmake
       gcc
       clang
