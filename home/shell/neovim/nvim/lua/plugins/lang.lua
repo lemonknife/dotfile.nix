@@ -2,13 +2,25 @@ return {
   { import = "lazyvim.plugins.extras.lsp.none-ls" },
 
   -- NixOS
-  { import = "lazyvim.plugins.extras.lang.nix" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "nix" } },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        nixd = {},
+      },
+    },
+  },
   {
     "nvimtools/none-ls.nvim",
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = vim.list_extend(opts.sources or {}, {
         nls.builtins.code_actions.statix,
+        nls.builtins.formatting.nixfmt,
         nls.builtins.diagnostics.deadnix,
       })
     end,
@@ -23,7 +35,7 @@ return {
   },
 
   -- Cpp
-  { import = "lazyvim.plugins.extras.lang.clang" },
+  { import = "lazyvim.plugins.extras.lang.clangd" },
   {
     "williamboman/mason.nvim",
     opts = { ensure_installed = { "clangd" } },
