@@ -25,4 +25,9 @@ return {
       return require "configs.gitsigns"
     end,
   },
+
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+  },
 }
