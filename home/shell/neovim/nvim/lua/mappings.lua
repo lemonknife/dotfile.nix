@@ -36,6 +36,7 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 
 map("n", "<leader>s", "<cmd>w<CR>", { desc = "Save file" })
 map("n", "<leader>Q", "<cmd>q!<CR>", { desc = "Force quit" })
+map("n", "<leader>q", "<cmd>q<CR>", { desc = "Force quit" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 -- map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "Toggle line number" })
@@ -125,8 +126,8 @@ end, { desc = "terminal toggle floating term" })
 
 -- Git
 map("n", "<leader>g", "", { desc = "Git" })
-map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
+map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
+map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "Telescope git status" })
 
 -- whichkey
 map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
