@@ -9,8 +9,8 @@
       unzip
       gnumake
       cmake
-      gcc
       clang
+      clang-tools
       deadnix
       statix
     ];
