@@ -3,7 +3,7 @@
     ./cli.nix
     ./fish.nix
     ./starship.nix
-    ./git
+    ./git.nix
     ./neovim
   ];
 }
