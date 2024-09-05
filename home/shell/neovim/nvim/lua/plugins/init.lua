@@ -17,4 +17,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = require "configs.treesitter",
   },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "User FilePost",
+    opts = function()
+      return require "configs.gitsigns"
+    end,
+  },
 }
