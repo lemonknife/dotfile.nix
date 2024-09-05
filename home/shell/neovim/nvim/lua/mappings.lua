@@ -36,7 +36,7 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 
 map("n", "<leader>s", "<cmd>w<CR>", { desc = "Save file" })
 map("n", "<leader>Q", "<cmd>q!<CR>", { desc = "Force quit" })
-map("n", "<leader>q", "<cmd>q<CR>", { desc = "Force quit" })
+map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 -- map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "Toggle line number" })
