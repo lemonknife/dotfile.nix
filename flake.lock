@@ -378,7 +378,8 @@
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixos-cosmic": "nixos-cosmic",
         "nixpkgs": "nixpkgs_3",
-        "rust-overlay": "rust-overlay_2"
+        "rust-overlay": "rust-overlay_2",
+        "tokyonight": "tokyonight"
       }
     },
     "rust-overlay": {
@@ -419,6 +420,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "tokyonight": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1725089858,
+        "narHash": "sha256-kxsNappeZSlUkPbxlgGZKKJGGZj2Ny0i2a+6G+8nH7s=",
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
+        "rev": "4b386e66a9599057587c30538d5e6192e3d1c181",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
         "type": "github"
       }
     },

@@ -21,6 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     grub2-themes.url = "github:vinceliuice/grub2-themes";
+    tokyonight = {
+      type = "github";
+      owner = "folke";
+      repo = "tokyonight.nvim";
+      flake = false;
+    };
   };
 
   outputs =
