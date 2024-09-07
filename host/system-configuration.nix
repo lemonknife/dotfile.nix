@@ -54,6 +54,14 @@
   };
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" ]; })
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode"
+        "CascadiaCode"
+      ];
+    })
+    noto-fonts-cjk
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
   ];
 }
