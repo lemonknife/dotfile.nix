@@ -153,7 +153,6 @@ map("n", "<leader>cc", function()
 end, { desc = "blankline jump to current context" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
 
 remap("n", "<leader>-", "<c-w>s", { desc = "Split window horizontally" })
 remap("n", "<leader>\\", "<c-w>v", { desc = "Split window vertically" })
