@@ -4,19 +4,33 @@
     enable = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
-      nixd
-      nixfmt-rfc-style
+      # required tools
       unzip
       gnumake
-      cmake
-      clang
-      clang-tools
+
+      # Lua LSP
+      lua-language-server
+      stylua
+
+      # Nix LSP
+      nixd
+      nixfmt-rfc-style
       deadnix
       statix
+
+      # CPP LSP
+      clang-tools
+
+      # Rust LSP
+      rust-analyzer
+      clippy
+      rustfmt
     ];
 
     defaultEditor = true;
     withPython3 = true;
+    # Python LSP
+    extraPython3Packages = pyPkgs: with pyPkgs; [ python-lsp-server ];
     withNodeJs = true;
   };
 

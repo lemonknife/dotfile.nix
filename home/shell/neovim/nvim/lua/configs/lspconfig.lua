@@ -5,7 +5,7 @@ require("nvchad.lsp").diagnostic_config()
 local lspconfig = require "lspconfig"
 local map = vim.keymap.set
 
-local servers = { "html", "cssls", "clangd", "nixd" }
+local servers = { "html", "cssls", "clangd", "nixd", "pylsp" }
 local nvlsp = require "nvchad.configs.lspconfig"
 local custom_attach = function(_, bufnr)
   local function opts(desc)

@@ -30,4 +30,9 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
   },
+
+  {
+    "williamboman/mason.nvim",
+    enabled = false,
+  },
 }

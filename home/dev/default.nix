@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    (rust-bin.stable.latest.default.override { extensions = [ "rust-analyzer" ]; })
+    rust-bin.stable.latest.default
     python313Full
     cmake
     clang
