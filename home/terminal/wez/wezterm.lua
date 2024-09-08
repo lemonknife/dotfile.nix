@@ -4,6 +4,8 @@ local wez = require("wezterm")
 local config = wez.config_builder()
 
 config.color_scheme = "Tokyo Night Moon"
+
+config.font_size = 15
 config.font = wez.font_with_fallback({
 	{ family = "CaskaydiaCove Nerd Font Propo", weight = "Regular", harfbuzz_features = { "ss01" } },
 	"FiraCode",
