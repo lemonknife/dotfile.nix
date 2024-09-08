@@ -25,12 +25,13 @@
       rust-analyzer
       clippy
       rustfmt
+
+      # Python LSP
+      pylyzer
     ];
 
     defaultEditor = true;
     withPython3 = true;
-    # Python LSP
-    extraPython3Packages = pyPkgs: with pyPkgs; [ python-lsp-server ];
     withNodeJs = true;
   };
 
