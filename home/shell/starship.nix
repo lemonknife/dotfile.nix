@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   programs.starship = {
     enable = true;
     settings = {
@@ -21,9 +22,7 @@
         "$golang"
         "$php"
         "$python"
-        "[ ](fg:#212736 bg:#1d2230)"
-        "$time"
-        "[ ](fg:#1d2230)"
+        "[ ](fg:#212736)"
         ''
 
           $character''
@@ -48,8 +47,7 @@
       };
       git_status = {
         style = "bg:#394260";
-        format =
-          "[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)";
+        format = "[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)";
       };
       aws = {
         symbol = "";
