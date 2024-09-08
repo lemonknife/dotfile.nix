@@ -2,6 +2,11 @@
 {
   programs.fish = {
     enable = true;
-    interactiveShellInit = builtins.readFile "${inputs.tokyonight}/extras/fish/tokyonight_moon.fish";
+    interactiveShellInit = builtins.concatStringsSep "\n" [
+      (builtins.readFile "${inputs.tokyonight}/extras/fish/tokyonight_moon.fish")
+      ''
+        set fish_greeting
+      ''
+    ];
   };
 }
