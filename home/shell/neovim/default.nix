@@ -28,6 +28,7 @@
 
       # Python LSP
       pylyzer
+      pyright
     ];
 
     defaultEditor = true;

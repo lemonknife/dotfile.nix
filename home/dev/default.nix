@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     rust-bin.stable.latest.default
-    python313Full
+    micromamba
     cmake
     clang
     clang-tools
