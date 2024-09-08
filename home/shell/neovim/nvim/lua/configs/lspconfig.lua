@@ -7,7 +7,13 @@ local map = vim.keymap.set
 
 local servers = { "html", "cssls", "clangd", "nixd", "pylyzer" }
 local nvlsp = require "nvchad.configs.lspconfig"
-local custom_attach = require("configs.lspsetup").on_attach
+local function custom_attach(client, bufnr)
+  local function opts(desc)
+    return { buffer = bufnr, desc = "LSP " .. desc }
+  end
+  require("configs.lspsetup").on_attach(client, bufnr)
+  map("n", "<leader>la", vim.lsp.buf.code_action, opts "Code action")
+end
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -24,6 +30,9 @@ lspconfig.lua_ls.setup {
 
   settings = {
     Lua = {
+      hint = {
+        enable = true,
+      },
       diagnostics = {
         globals = { "vim" },
       },

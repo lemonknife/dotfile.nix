@@ -6,13 +6,16 @@ return {
     lazy = false,
     opts = {
       server = {
-        -- on_attach = function(_, bufnr)
-        --   local function opts(desc)
-        --     return { buffer = bufnr, desc = "Rust LSP " .. desc }
-        --   end
-        --
-        --   vim.keymap.set("n", "<leader>la", vim.cmd.RustLsp "codeAction", opts "Code action")
-        -- end,
+        on_attach = function(client, bufnr)
+          local map = vim.keymap.set
+          local function opts(desc)
+            return { buffer = bufnr, desc = "Rust LSP " .. desc }
+          end
+          require("configs.lspsetup").on_attach(client, bufnr)
+          map("n", "<leader>la", function()
+            vim.cmd.RustLsp "codeAction"
+          end, opts "Code action")
+        end,
         default_settings = {
           ["rust-analyzer"] = {
             cargo = {
