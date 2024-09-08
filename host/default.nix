@@ -2,15 +2,21 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./system-configuration.nix
-      ./desktop-environment.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./system-configuration.nix
+    ./desktop-environment.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
@@ -29,7 +35,7 @@
     };
     efi = {
       canTouchEfiVariables = true;
-    }; 
+    };
   };
 
   networking.hostName = "lemon"; # Define your hostname.
@@ -44,7 +50,7 @@
   networking.proxy.noProxy = "127.0.0.1,localhost,lemon.localdomain";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "zh_CN.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -56,7 +62,6 @@
 
   services.xserver.displayManager.gdm.enable = false;
   services.xserver.desktopManager.gnome.enable = false;
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -65,9 +70,11 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
+
+  # Enable Fish Completion for Nix Commands
+  programs.fish.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lemon = {
@@ -128,4 +135,3 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
-
