@@ -13,6 +13,7 @@
     dates = lib.mkDefault "weekly";
     options = lib.mkDefault "--delete-older-than 7d";
   };
+  nix.settings.auto-optimise-store = true;
 
   nixpkgs.config.allowUnfree = true;
 
