@@ -27,7 +27,9 @@
       rustfmt
 
       # Python LSP
-      python312Packages.python-lsp-server
+      ruff
+      ruff-lsp
+      basedpyright
     ];
 
     defaultEditor = true;

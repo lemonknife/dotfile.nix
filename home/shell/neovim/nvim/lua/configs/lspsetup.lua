@@ -25,6 +25,10 @@ M.on_attach = function(client, bufnr)
 
   map("n", "<leader>lD", vim.lsp.buf.type_definition, opts "Go to type definition")
 
+  if client.name == "ruff" then
+    client.server_capabilities.hoverProvider = false
+  end
+
   if client.server_capabilities.inlayHintProvider then
     local inlay_hints_group = vim.api.nvim_create_augroup("InlayHints", { clear = false })
 

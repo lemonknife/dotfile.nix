@@ -5,7 +5,7 @@ require("nvchad.lsp").diagnostic_config()
 local lspconfig = require "lspconfig"
 local map = vim.keymap.set
 
-local servers = { "html", "cssls", "clangd", "nixd", "pylsp" }
+local servers = { "html", "cssls", "clangd", "nixd", "ruff" }
 local nvlsp = require "nvchad.configs.lspconfig"
 local function custom_attach(client, bufnr)
   local function opts(desc)
@@ -22,6 +22,21 @@ for _, lsp in ipairs(servers) do
     capabilities = nvlsp.capabilities,
   }
 end
+
+lspconfig.basedpyright.setup {
+  on_attach = custom_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+
+  settings = {
+    basedpyright = {
+      disableOrganizeImports = true,
+      analysis = {
+        ignore = { "*" },
+      },
+    },
+  },
+}
 
 lspconfig.lua_ls.setup {
   on_attach = custom_attach,

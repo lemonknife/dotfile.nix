@@ -6,6 +6,7 @@
   };
 
   inputs = {
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     rust-overlay = {
@@ -71,7 +72,15 @@
             }
             nixos-cosmic.nixosModules.default
 
-            { nixpkgs.overlays = [ rust-overlay.overlays.default ]; }
+            {
+              nixpkgs.overlays = [
+                rust-overlay.overlays.default
+                (final: prev: {
+                  # Replace unstable package with stable version
+                  basedpyright = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.basedpyright;
+                })
+              ];
+            }
           ];
         };
       };
