@@ -27,8 +27,7 @@
       rustfmt
 
       # Python LSP
-      pylyzer
-      pyright
+      python312Packages.python-lsp-server
     ];
 
     defaultEditor = true;
