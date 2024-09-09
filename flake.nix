@@ -78,6 +78,7 @@
                 (final: prev: {
                   # Replace unstable package with stable version
                   basedpyright = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.basedpyright;
+                  ruff = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.ruff;
                 })
               ];
             }
