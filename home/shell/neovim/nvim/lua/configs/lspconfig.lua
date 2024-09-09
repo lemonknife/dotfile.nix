@@ -5,70 +5,36 @@ require("nvchad.lsp").diagnostic_config()
 local lspconfig = require "lspconfig"
 local map = vim.keymap.set
 
-local servers = { "html", "cssls", "clangd", "nixd", "ruff" }
+local servers = { "lua_ls", "clangd", "nixd", "basedpyright", "ruff" }
 local nvlsp = require "nvchad.configs.lspconfig"
-local function custom_attach(client, bufnr)
+
+local function on_attach(client, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
-  require("configs.lspsetup").on_attach(client, bufnr)
+  require("configs.lsp").on_attach(client, bufnr)
   map("n", "<leader>la", vim.lsp.buf.code_action, opts "Code action")
 end
 
+local function safe_require(module_name)
+  local success, settings = pcall(require, module_name)
+  if success then
+    return settings
+  else
+    return {}
+  end
+end
+
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = custom_attach,
+  local server_config = {
+    on_attach = on_attach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
   }
+
+  for k, v in pairs(safe_require("configs.lsp." .. lsp)) do
+    server_config[k] = v
+  end
+
+  lspconfig[lsp].setup(server_config)
 end
-
-lspconfig.basedpyright.setup {
-  on_attach = custom_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-
-  settings = {
-    basedpyright = {
-      disableOrganizeImports = true,
-      analysis = {
-        ignore = { "*" },
-      },
-    },
-  },
-}
-
-lspconfig.lua_ls.setup {
-  on_attach = custom_attach,
-  capabilities = nvlsp.capabilities,
-  on_init = nvlsp.on_init,
-
-  settings = {
-    Lua = {
-      hint = {
-        enable = true,
-      },
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          vim.fn.expand "$VIMRUNTIME/lua",
-          vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
-          vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
-          vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
-          "${3rd}/luv/library",
-        },
-        maxPreload = 100000,
-        preloadFileSize = 10000,
-      },
-    },
-  },
-}
-
--- configuring single server, example: typescript
--- lspconfig.tsserver.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
