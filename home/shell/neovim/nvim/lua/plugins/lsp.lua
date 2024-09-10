@@ -14,6 +14,7 @@ return {
         "basedpyright",
         "ruff"
       })
+      opts.formatting = { format_on_save = false }
     end
   },
 
