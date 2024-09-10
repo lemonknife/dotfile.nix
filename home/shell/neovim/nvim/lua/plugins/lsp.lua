@@ -1,20 +1,20 @@
 return {
+
+  { import = "astrocommunity.recipes.astrolsp-no-insert-inlay-hints" },
+
   {
     "AstroNvim/astrolsp",
-    optional = true,
-    opts = {
-      config = {
-        lua_ls = { settings = { Lua = { hint = { enable = true, arrayIndex = "Disable" } } } },
-      },
-    },
+    ---@param opts AstroLSPOpts
+    opts = function(plugin, opts)
+      opts.servers = opts.servers or {}
+      vim.list_extend(opts.servers, {
+        "lua_ls",
+        "nixd",
+        "clangd",
+        "basedpyright",
+        "ruff"
+      })
+    end
   },
- {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-      },
-    },
-  },
+
 }
