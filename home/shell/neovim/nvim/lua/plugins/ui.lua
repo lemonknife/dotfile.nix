@@ -10,5 +10,7 @@ return {
     },
   },
 
-  { import = "astrocommunity.recipes.heirline-nvchad-statusline" }
+  { import = "astrocommunity.recipes.heirline-nvchad-statusline" },
+
+  { import = "astrocommunity.utility.noice-nvim" }
 }
