@@ -3,6 +3,7 @@ local options = {
     lua = { "stylua" },
     cpp = { "clang-format" },
     nix = { "nixfmt" },
+    python = { "ruff-format" },
     -- css = { "prettier" },
     -- html = { "prettier" },
   },

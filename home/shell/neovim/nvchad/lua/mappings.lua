@@ -69,6 +69,8 @@ map("n", "<leader>bx", function()
   require("nvchad.tabufline").close_buffer()
 end, { desc = "buffer close" })
 
+map("n", "<leader>bf", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
+
 -- Comment
 map("n", "<leader>/", "gcc", { desc = "Toggle Comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
@@ -94,6 +96,7 @@ map(
   "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
   { desc = "telescope find all files" }
 )
+map("n", "<leader>ft", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 
 -- Terminal
 map("n", "<leader>t", "", { desc = "Terminal" })
@@ -107,9 +110,13 @@ map("n", "<leader>tv", function()
   require("nvchad.term").new { pos = "vsp" }
 end, { desc = "terminal new vertical window" })
 
+map({ "n", "t" }, "<C-/>", function()
+  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+end, { desc = "Terminal Toggle Floating term" })
+
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
-map("n", "<leader>tb", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
+map("n", "<leader>tf", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 
 -- toggleable
 map({ "n", "t" }, "<A-v>", function()
