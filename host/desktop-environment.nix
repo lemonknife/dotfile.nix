@@ -8,4 +8,7 @@
 
   # Clipboard Support
   environment.systemPackages = with pkgs; [ wl-clipboard ];
+  environment.variables = {
+    COSMIC_DATA_CONTROL_ENABLED=1;
+  };
 }
