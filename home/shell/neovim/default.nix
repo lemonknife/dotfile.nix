@@ -30,6 +30,7 @@
       ruff
       ruff-lsp
       basedpyright
+      python3Full
     ];
 
     defaultEditor = true;

@@ -16,6 +16,9 @@ return {
             },
           },
         },
+        ruff = {
+          mason = false,
+        },
       },
     },
   },
