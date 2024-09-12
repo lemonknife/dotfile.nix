@@ -11,9 +11,6 @@ return {
             basedpyright = {
               disableOrganizeImports = true, -- managed by ruff
               analysis = {
-                typeCheckingMode = "all",
-                autoSearchPaths = true,
-                useLibraryCodeForTypes = true,
                 autoImportCompletions = true,
                 diagnosticsMode = "openFilesOnly",
                 diagnosticSeverityOverrides = {
