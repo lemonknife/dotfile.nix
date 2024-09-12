@@ -9,10 +9,20 @@ return {
           mason = false,
           settings = {
             basedpyright = {
+              disableOrganizeImports = true, -- managed by ruff
               analysis = {
-                ignore = { "*" },
+                typeCheckingMode = "all",
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                autoImportCompletions = true,
+                diagnosticsMode = "openFilesOnly",
+                diagnosticSeverityOverrides = {
+                  reportUnknownMemberType = false,
+                  reportUnknownArgumentType = false,
+                  reportUnusedImport = false, -- ugly :(
+                  reportUndefinedVariable = false,
+                },
               },
-              disableOrganizeImports = true,
             },
           },
         },
