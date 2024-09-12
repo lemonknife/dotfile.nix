@@ -7,7 +7,18 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        nixd = { mason = false },
+        nixd = {
+          mason = false,
+          settings = {
+            nixd = {
+              options = {
+                home_manager = {
+                  expr = '(builtins.getFlake "/home/lemon/dotfiles").homeConfigurations."lemon@lemon".options',
+                },
+              },
+            },
+          },
+        },
       },
     },
   },
