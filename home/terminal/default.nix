@@ -1,6 +1,7 @@
-{pkgs,...}:
+{ pkgs, ... }:
 {
   imports = [
     ./wez
+    ./kitty.nix
   ];
 }
