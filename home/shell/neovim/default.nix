@@ -10,7 +10,6 @@
 
       # Lua LSP
       lua-language-server
-      stylua
 
       # Nix LSP
       nixd
@@ -25,6 +24,7 @@
       rust-analyzer
       clippy
       rustfmt
+      taplo
 
       # Python LSP
       ruff
