@@ -34,6 +34,24 @@ return {
   },
 
   {
+    "linux-cultist/venv-selector.nvim",
+    opts = {
+      settings = {
+        search = {
+          micromamba_base = {
+            command = "$FD 'bin/python$' ~/micromamba/bin --full-path --color never",
+            type = "anaconda",
+          },
+          micromamba_envs = {
+            command = "$FD 'bin/python$' ~/micromamba/envs --full-path --color never",
+            type = "anaconda",
+          },
+        },
+      },
+    },
+  },
+
+  {
     "stevearc/conform.nvim",
     optional = true,
     opts = {
