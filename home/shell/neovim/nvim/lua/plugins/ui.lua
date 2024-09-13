@@ -1,4 +1,6 @@
 return {
+  { import = "lazyvim.plugins.extras.ui.edgy" },
+
   {
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
