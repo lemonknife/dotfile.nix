@@ -1,9 +1,10 @@
 {
   imports = [
+    ./neovim
     ./cli.nix
     ./fish.nix
     ./starship.nix
     ./git.nix
-    ./neovim
+    ./yazi.nix
   ];
 }
