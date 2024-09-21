@@ -11,14 +11,7 @@ return {
             basedpyright = {
               disableOrganizeImports = true, -- managed by ruff
               analysis = {
-                autoImportCompletions = true,
-                diagnosticsMode = "openFilesOnly",
-                diagnosticSeverityOverrides = {
-                  reportUnknownMemberType = false,
-                  reportUnknownArgumentType = false,
-                  reportUnusedImport = false, -- ugly :(
-                  reportUndefinedVariable = false,
-                },
+                typeCheckingMode = "standard",
               },
             },
           },

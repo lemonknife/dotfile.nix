@@ -1,6 +1,8 @@
 return {
   { import = "lazyvim.plugins.extras.lang.rust" },
 
+  { "mrcjkb/rustaceanvim", version = "^5" },
+
   {
     "stevearc/conform.nvim",
     optional = true,
