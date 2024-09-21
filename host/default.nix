@@ -16,6 +16,7 @@
     ./hardware-configuration.nix
     ./system-configuration.nix
     ./desktop-environment.nix
+    ./system-program.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
