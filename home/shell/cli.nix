@@ -1,4 +1,9 @@
-{ lib, inputs, ... }:
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   xdg.configFile."yazi/tokyonight_moon.tmTheme".source = "${inputs.tokyonight}/extras/sublime/tokyonight_moon.tmTheme";
   programs.yazi = {
@@ -15,4 +20,6 @@
   programs.fzf.enable = true;
   # Set fzf theme
   programs.fish.interactiveShellInit = builtins.readFile "${inputs.tokyonight}/extras/fzf/tokyonight_moon.sh";
+
+  home.packages = with pkgs; [ ouch ];
 }
