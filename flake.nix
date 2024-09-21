@@ -6,9 +6,9 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-nightly.url = "github:nixos/nixpkgs/master";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -76,12 +76,12 @@
             {
               nixpkgs.overlays = [
                 rust-overlay.overlays.default
-                (final: prev: {
-                  # Replace unstable package with stable version
-                  basedpyright = inputs.nixpkgs-nightly.legacyPackages.${prev.system}.basedpyright;
-                  ruff = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.ruff;
-                  yazi = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.yazi;
-                })
+                # (final: prev: {
+                #   # Replace unstable package with stable version
+                #   basedpyright = inputs.nixpkgs-nightly.legacyPackages.${prev.system}.basedpyright;
+                #   ruff = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.ruff;
+                #   yazi = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.yazi;
+                # })
               ];
             }
           ];

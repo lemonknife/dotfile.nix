@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
   programs.kitty = {
     enable = true;
@@ -17,6 +16,6 @@
       tab_bar_style = "powerline";
       tab_powerline_style = "slanted";
     };
-    theme = "Tokyo Night Moon";
+    themeFile = "tokyo_night_moon";
   };
 }
