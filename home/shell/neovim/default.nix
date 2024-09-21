@@ -39,7 +39,7 @@
   };
 
   xdg.configFile.nvim = {
-    source = ./nvim;
+    source = ./lazyvim;
     recursive = true;
   };
 }
