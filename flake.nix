@@ -35,6 +35,12 @@
       repo = "plugins";
       flake = false;
     };
+    starship-yazi = {
+      type = "github";
+      owner = "Rolv-Apneseth";
+      repo = "starship.yazi";
+      flake = false;
+    };
   };
 
   outputs =

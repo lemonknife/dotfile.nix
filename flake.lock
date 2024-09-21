@@ -379,6 +379,7 @@
         "nixos-cosmic": "nixos-cosmic",
         "nixpkgs": "nixpkgs_3",
         "rust-overlay": "rust-overlay_2",
+        "starship-yazi": "starship-yazi",
         "tokyonight": "tokyonight",
         "yazi-plugins": "yazi-plugins"
       }
@@ -421,6 +422,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "starship-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724165300,
+        "narHash": "sha256-0nritWu53CJAuqQxx6uOXMg4WiHTVm/i78nNRgGrlgg=",
+        "owner": "Rolv-Apneseth",
+        "repo": "starship.yazi",
+        "rev": "20d5a4d4544124bade559b31d51ad41561dad92b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Rolv-Apneseth",
+        "repo": "starship.yazi",
         "type": "github"
       }
     },
