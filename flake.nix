@@ -29,6 +29,12 @@
       repo = "tokyonight.nvim";
       flake = false;
     };
+    yazi-plugins = {
+      type = "github";
+      owner = "yazi-rs";
+      repo = "plugins";
+      flake = false;
+    };
   };
 
   outputs =

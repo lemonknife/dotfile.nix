@@ -379,7 +379,8 @@
         "nixos-cosmic": "nixos-cosmic",
         "nixpkgs": "nixpkgs_3",
         "rust-overlay": "rust-overlay_2",
-        "tokyonight": "tokyonight"
+        "tokyonight": "tokyonight",
+        "yazi-plugins": "yazi-plugins"
       }
     },
     "rust-overlay": {
@@ -458,6 +459,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "yazi-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1726496065,
+        "narHash": "sha256-3F7RIg2CZH/jo+XhG0n4Zfspgi/77Hve421j0p3Og+Q=",
+        "owner": "yazi-rs",
+        "repo": "plugins",
+        "rev": "49137feda8e140ebd7870292030d89c221cacce8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yazi-rs",
+        "repo": "plugins",
         "type": "github"
       }
     }
