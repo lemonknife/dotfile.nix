@@ -6,5 +6,6 @@
     ./starship.nix
     ./git.nix
     ./yazi.nix
+    ./tmux.nix
   ];
 }
