@@ -50,6 +50,13 @@ in
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
+    defaultCacheTtl = 36000;
+    maxCacheTtl = 36000;
+    defaultCacheTtlSsh = 36000;
+    maxCacheTtlSsh = 36000;
+    extraConfig = ''
+      pinentry-program ${pkgs.pinentry-qt}/bin/pinentry
+    '';
   };
 
   home.packages = with pkgs; [

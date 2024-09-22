@@ -41,6 +41,7 @@
       repo = "starship.yazi";
       flake = false;
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs =
@@ -61,6 +62,8 @@
           };
           modules = [
             ./host
+
+            inputs.agenix.nixosModules.default
 
             home-manager.nixosModules.home-manager
             {

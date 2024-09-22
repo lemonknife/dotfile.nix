@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -19,6 +20,7 @@ in
     enable = true;
     userName = "lemonknife";
     userEmail = "lemonife@protonmail.com";
+    includes = [ { path = config.age.secrets.gitconfig.path; } ];
   };
 
   programs.lazygit = {

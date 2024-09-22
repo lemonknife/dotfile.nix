@@ -1,8 +1,11 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   hardware.keyboard.qmk.enable = true;
-  environment.systemPackages = with pkgs; [
-    via
+  environment.systemPackages = [
+    pkgs.via
+    inputs.agenix.packages.x86_64-linux.default
   ];
+  services.pcscd.enable = true;
   services.udev.packages = [ pkgs.via ];
+  services.dbus.packages = [ pkgs.gcr ];
 }

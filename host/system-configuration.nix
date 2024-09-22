@@ -64,4 +64,12 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
   ];
+
+  age.identityPaths = [ "/home/lemon/.ssh/id_ed25519" ];
+  age.secrets.gitconfig = {
+    file = ../secret/gitconfig-secret.age;
+    mode = "770";
+    owner = "lemon";
+    group = "wheel";
+  };
 }
