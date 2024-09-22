@@ -17,7 +17,7 @@ in
 {
   programs.git = {
     enable = true;
-    userName = "Lemonife";
+    userName = "lemonknife";
     userEmail = "lemonife@protonmail.com";
   };
 

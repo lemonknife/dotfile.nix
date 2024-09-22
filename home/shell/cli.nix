@@ -46,8 +46,15 @@ in
     source = yamlFormat.generate "lsd-icons" icons;
   };
 
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+  };
+
   home.packages = with pkgs; [
     ouch
     vivid
+    gpg-tui
   ];
 }
