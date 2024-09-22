@@ -11,5 +11,11 @@
         eval "$(micromamba shell hook --shell fish)"
       ''
     ];
+    plugins = [
+      {
+        name = "fish-ssh-agent";
+        src = inputs.fish-ssh-agent;
+      }
+    ];
   };
 }

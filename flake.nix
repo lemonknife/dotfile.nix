@@ -41,6 +41,12 @@
       repo = "starship.yazi";
       flake = false;
     };
+    fish-ssh-agent = {
+      type = "github";
+      owner = "danhper";
+      repo = "fish-ssh-agent";
+      flake = false;
+    };
     agenix.url = "github:ryantm/agenix";
   };
 
