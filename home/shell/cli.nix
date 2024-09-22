@@ -1,4 +1,22 @@
-{ inputs, pkgs, ... }:
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
+let
+  icons = {
+    extension = {
+      markdown = "";
+      md = "";
+      readme = "";
+    };
+    name = {
+      readme = "";
+    };
+  };
+  yamlFormat = pkgs.formats.yaml { };
+in
 {
   programs.ripgrep.enable = true;
   programs.fd.enable = true;
@@ -21,13 +39,11 @@
         "git"
         "name"
       ];
-      icons = {
-        extension = {
-          markdown = "";
-          md = "";
-        };
-      };
     };
+  };
+
+  xdg.configFile."lsd/icons.yaml" = lib.mkIf (icons != { }) {
+    source = yamlFormat.generate "lsd-icons" icons;
   };
 
   home.packages = with pkgs; [
