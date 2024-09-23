@@ -36,7 +36,7 @@ return {
 				end,
 			},
 		},
-		opts = function() end,
+		opts = require("configs.telescope"),
 		keys = require("mappings.telescope"),
 	},
 }
