@@ -24,7 +24,7 @@ require("lazy").setup({
 }, lazy_config)
 
 require("options")
-require("nvchad.autocmds")
+require("autocmds")
 
 vim.schedule(function()
 	require("mappings")
