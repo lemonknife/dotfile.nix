@@ -4,13 +4,13 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = "BufWritePre",
-		opts = require("configs.conform"),
+		opts = require("options.conform"),
 	},
 
 	{
 		"williamboman/mason.nvim",
 		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
-		opts = require("configs.mason"),
+		opts = require("options.mason"),
 		config = function(_, opts)
 			if opts.ensure_installed then
 				vim.api.nvim_echo({

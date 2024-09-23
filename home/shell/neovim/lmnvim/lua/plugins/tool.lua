@@ -5,7 +5,7 @@ return {
 		dependencies = {
 			{ "kkharji/sqlite.lua" },
 		},
-		opts = require("configs.yanky"),
+		opts = require("options.yanky"),
 		keys = require("mappings.yanky"),
 	},
 }
