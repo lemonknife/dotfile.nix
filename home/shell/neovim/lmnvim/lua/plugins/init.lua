@@ -10,9 +10,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
-		opts = function()
-			return require("nvchad.configs.mason")
-		end,
+		opts = require("configs.mason"),
 		config = function(_, opts)
 			if opts.ensure_installed then
 				vim.api.nvim_echo({
@@ -25,5 +23,20 @@ return {
 
 			require("mason").setup(opts)
 		end,
+	},
+
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+				config = function(plugin)
+					require("configs.telescope-fzf-native")(plugin)
+				end,
+			},
+		},
+		opts = function() end,
+		keys = require("mappings.telescope"),
 	},
 }

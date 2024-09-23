@@ -31,6 +31,9 @@
       ruff-lsp
       basedpyright
       python3Full
+
+      # sqlite
+      sqlite
     ];
 
     defaultEditor = true;
