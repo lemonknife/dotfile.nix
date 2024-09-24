@@ -29,7 +29,6 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		opts = require("options.telescope"),
-		keys = require("mappings.telescope"),
 	},
 
 	{

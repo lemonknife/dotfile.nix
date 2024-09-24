@@ -2,17 +2,7 @@ local function find_command()
 	return { "rg", "--files", "--color", "never", "-g", "!.git" }
 end
 
-vim.keymap.set("n", "<leader>fF", function()
-	require("telescope.builtin").find_files({
-		cwd = require("telescope.utils").buffer_dir(),
-	})
-end, { desc = "telescope find files (cwd)" })
-
-vim.keymap.set("n", "<leader>fW", function()
-	require("telescope.builtin").live_grep({
-		cwd = require("telescope.utils").buffer_dir(),
-	})
-end, { desc = "telescope find files (cwd)" })
+require("mappings.telescope")
 
 local options = {
 	defaults = {

@@ -1,18 +1,22 @@
-local keys = {
-	{ "<leader>fb", "<cmd>Telescope buffers<CR>", mode = { "n" }, desc = "Telescope find buffers" },
-	{ "<leader>fh", "<cmd>Telescope help_tags<CR>", mode = { "n" }, desc = "Telescope help page" },
-	{
-		"<leader>ff",
-		"<cmd>ProjectRoot<CR><cmd>Telescope find_files<CR>",
-		mode = { "n" },
-		desc = "telescope find files (root)",
-	},
-	{
-		"<leader>fw",
-		"<cmd>ProjectRoot<CR><cmd>Telescope live_grep<CR>",
-		mode = { "n" },
-		desc = "Telescope find word (root)",
-	},
-}
+local map = vim.keymap.set
+local path = require("utils.path")
 
-return keys
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope find buffers" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Telescope help page" })
+
+map("n", "<leader>fF", "<cmd>Telescope find_files<CR>", { desc = "telescope find files (cwd)" })
+map("n", "<leader>fW", "<cmd>Telescope live_grep<CR>", { desc = "telescope find files (cwd)" })
+map("n", "<leader>ff", function()
+	require("telescope.builtin").find_files({
+		cwd = path.get(),
+	})
+end, { desc = "telescope find files (root)" })
+map(
+	"n",
+	"<leader>fw",function()
+
+	require("telescope.builtin").live_grep({
+		cwd = path.get(),
+	})end,
+	{ desc = "Telescope find word (root)" }
+)
