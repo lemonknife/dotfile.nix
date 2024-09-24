@@ -1,5 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	cmd = "Telescope",
 	dependencies = {
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
@@ -10,7 +11,10 @@ return {
 		},
 		{
 			"jay-babu/project.nvim",
-			event = "VeryLazy",
+			cmd = "ProjectRoot",
+			opts = {
+				manual_mode = true,
+			},
 			config = function(_, opts)
 				require("configs.project")(_, opts)
 			end,
