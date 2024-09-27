@@ -4,24 +4,15 @@ local configs = function(plugin)
 		if not ok then
 			local lib = plugin.dir .. "/build/libfzf.so"
 			if not vim.uv.fs_stat(lib) then
-				vim.api.nvim_echo({
-					{ "`telescope-fzf-native.nvim` not built. Rebuilding...", "WarningMsg" },
-				}, false, {})
+				vim.notify("`telescope-fzf-native.nvim` not built. Rebuilding...", vim.log.levels.WARN)
 				require("lazy").build({ plugins = { plugin }, show = false }):wait(function()
-					vim.api.nvim_echo({
-						{
-							"Rebuilding `telescope-fzf-native.nvim` done.\nPlease restart Neovim.",
-							"InfoMsg",
-						},
-					}, false, {})
+					vim.notify(
+						"Rebuilding `telescope-fzf-native.nvim` done.\nPlease restart Neovim.",
+						vim.log.levels.INFO
+					)
 				end)
 			else
-				vim.api.nvim_echo({
-					{
-						"Failed to load `telescope-fzf-native.nvim`:\n" .. err,
-						"ErrorMsg",
-					},
-				}, false, {})
+				vim.notify("Failed to load `telescope-fzf-native.nvim`:\n" .. err, vim.log.levels.ERROR)
 			end
 		end
 	end)

@@ -15,14 +15,8 @@ return {
 		opts = require("options.mason"),
 		config = function(_, opts)
 			if opts.ensure_installed then
-				vim.api.nvim_echo({
-					{
-						"\n   ensure_installed has been removed!",
-						"WarningMsg",
-					},
-				}, false, {})
+				vim.notify("\n   ensure_installed has been removed!", vim.log.levels.ERROR)
 			end
-
 			require("mason").setup(opts)
 		end,
 	},
