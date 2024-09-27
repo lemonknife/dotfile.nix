@@ -61,6 +61,7 @@
         "CascadiaCode"
       ];
     })
+    lxgw-wenkai
     noto-fonts-cjk
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
