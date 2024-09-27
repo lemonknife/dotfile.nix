@@ -10,6 +10,7 @@
 
       # Lua LSP
       lua-language-server
+      stylua
 
       # Nix LSP
       nixd
