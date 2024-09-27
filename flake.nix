@@ -23,6 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     grub2-themes.url = "github:vinceliuice/grub2-themes";
+    catppuccin.url = "github:catppuccin/nix";
     tokyonight = {
       type = "github";
       owner = "folke";
