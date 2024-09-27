@@ -1,7 +1,5 @@
-local utils = require("utils")
-
 local configs = function(plugin)
-	utils.on_load("telescope.nvim", function()
+	LazyVim.on_load("telescope.nvim", function()
 		local ok, err = pcall(require("telescope").load_extension, "fzf")
 		if not ok then
 			local lib = plugin.dir .. "/build/libfzf.so"

@@ -1,3 +1,5 @@
+LazyVim = require("lazyvim.util")
+
 return {
 	"nvim-lua/plenary.nvim",
 
@@ -107,30 +109,20 @@ return {
 						},
 					},
 				},
-				setup = {
-					-- example to setup with typescript.nvim
-					-- tsserver = function(_, opts)
-					--   require("typescript").setup({ server = opts })
-					--   return true
-					-- end,
-					-- Specify * to use this function as a fallback for any server
-					-- ["*"] = function(server, opts) end,
-				},
+				setup = {},
 			}
 			return ret
 		end,
 		config = function(_, opts)
-			local lsp_utils = require("utils.lsp")
-
-			lsp_utils.on_attach(function(client, buffer)
+			LazyVim.lsp.on_attach(function(client, buffer)
 				require("mappings.nvim-lspconfig").on_attach(client, buffer)
 			end)
 
-			lsp_utils.setup()
-			lsp_utils.on_dynamic_capability(require("mappings.nvim-lspconfig").on_attach)
+			LazyVim.lsp.setup()
+			LazyVim.lsp.on_dynamic_capability(require("mappings.nvim-lspconfig").on_attach)
 
 			if opts.inlay_hints.enabled then
-				lsp_utils.on_supports_method("textDocument/inlayHint", function(client, buffer)
+				LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
 					if
 						vim.api.nvim_buf_is_valid(buffer)
 						and vim.bo[buffer].buftype == ""
@@ -138,6 +130,16 @@ return {
 					then
 						vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
 					end
+				end)
+			end
+
+			if opts.codelens.enabled and vim.lsp.codelens then
+				LazyVim.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+					vim.lsp.codelens.refresh()
+					vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+						buffer = buffer,
+						callback = vim.lsp.codelens.refresh,
+					})
 				end)
 			end
 

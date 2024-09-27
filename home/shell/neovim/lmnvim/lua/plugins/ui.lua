@@ -26,7 +26,6 @@ return {
 			end
 		end,
 		opts = function()
-			local lualine_utils = require("utils.lualine")
 			-- PERF: we don't need this lualine require madness 🤷
 			local lualine_require = require("lualine_require")
 			lualine_require.require = require
@@ -44,7 +43,7 @@ return {
 					lualine_b = { "branch" },
 
 					lualine_c = {
-						lualine_utils.root_dir(),
+						LazyVim.lualine.root_dir(),
 						{
 							"diagnostics",
 							symbols = {
@@ -55,7 +54,7 @@ return {
 							},
 						},
 						{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-						{ lualine_utils.pretty_path() },
+						{ LazyVim.lualine.pretty_path() },
 					},
 				},
 				extensions = { "mason", "lazy" },
