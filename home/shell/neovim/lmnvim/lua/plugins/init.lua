@@ -28,12 +28,6 @@ return {
 	},
 
 	{
-		"nvim-telescope/telescope.nvim",
-		cmd = "Telescope",
-		opts = require("options.telescope"),
-	},
-
-	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
 		build = ":TSUpdate",
@@ -115,11 +109,11 @@ return {
 		end,
 		config = function(_, opts)
 			LazyVim.lsp.on_attach(function(client, buffer)
-				require("mappings.nvim-lspconfig").on_attach(client, buffer)
+				require("mappings.lsp").on_attach(client, buffer)
 			end)
 
 			LazyVim.lsp.setup()
-			LazyVim.lsp.on_dynamic_capability(require("mappings.nvim-lspconfig").on_attach)
+			LazyVim.lsp.on_dynamic_capability(require("mappings.lsp").on_attach)
 
 			if opts.inlay_hints.enabled then
 				LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
