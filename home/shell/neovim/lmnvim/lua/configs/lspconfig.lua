@@ -5,6 +5,7 @@ local configs = function(_, opts)
 
 	LazyVim.lsp.setup()
 	LazyVim.lsp.on_dynamic_capability(require("mappings.lsp").on_attach)
+	LazyVim.lsp.words.setup(opts.document_highlight)
 
 	if opts.inlay_hints.enabled then
 		LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
