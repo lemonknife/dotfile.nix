@@ -13,7 +13,7 @@ function M.get()
 	end
     -- stylua: ignore
     M._keys =  {
-      { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+      { "<leader>li", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
       { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
       { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
       { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
@@ -22,11 +22,11 @@ function M.get()
       { "K", vim.lsp.buf.hover, desc = "Hover" },
       { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
       { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-      { "<leader>sa", vim.lsp.buf.code_action, desc = "LSP Code Action", mode = { "n", "v" }, has = "codeAction" },
-      { "<leader>sc", vim.lsp.codelens.run, desc = "LSP Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-      { "<leader>sC", vim.lsp.codelens.refresh, desc = "LSP Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+      { "<leader>la", vim.lsp.buf.code_action, desc = "LSP Code Action", mode = { "n", "v" }, has = "codeAction" },
+      { "<leader>lc", vim.lsp.codelens.run, desc = "LSP Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+      { "<leader>lC", vim.lsp.codelens.refresh, desc = "LSP Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
 --      { "<leader>cR", LazyVim.lsp.rename_file, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-      { "<leader>sr", vim.lsp.buf.rename, desc = "LSP Rename", has = "rename" },
+      { "<leader>lr", vim.lsp.buf.rename, desc = "LSP Rename", has = "rename" },
 --      { "<leader>cA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
 --      { "]]", function() LazyVim.lsp.words.jump(vim.v.count1) end, has = "documentHighlight",
 --        desc = "Next Reference", cond = function() return LazyVim.lsp.words.enabled end },
