@@ -24,11 +24,6 @@ return {
 			local cmp = require("cmp")
 			local defaults = require("cmp.config.default")()
 			local auto_select = true
-			vim.api.nvim_set_hl(
-				0,
-				"NormalBorder",
-				{ fg = require("tokyonight.colors").setup().border_highlight, bg = nil }
-			)
 			return {
 				auto_brackets = {}, -- configure any filetype to auto add brackets
 				completion = {

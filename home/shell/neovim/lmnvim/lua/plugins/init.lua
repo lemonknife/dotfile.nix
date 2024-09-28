@@ -56,6 +56,14 @@ return {
 		cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
 		dependencies = {
 			"stevearc/dressing.nvim",
+			opts = {
+				input = {
+					win_options = {
+						winblend = 10,
+						winhighlight = "Normal:Normal,FloatBorder:NormalBorder,CursorLine:PmenuSel,Search:None",
+					},
+				},
+			},
 		},
 		opts = require("options.nvimtree"),
 		keys = {
