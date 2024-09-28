@@ -3,6 +3,7 @@ local options = {
 		lua = { "stylua" },
 		cpp = { "clang-format" },
 		c = { "clang-format" },
+		nix = { "nixfmt" },
 	},
 
 	format_on_save = {

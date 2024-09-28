@@ -4,32 +4,6 @@ return {
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
-				lua_ls = {
-					settings = {
-						Lua = {
-							workspace = {
-								checkThirdParty = false,
-							},
-							codeLens = {
-								enable = true,
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-							doc = {
-								privateName = { "^_" },
-							},
-							hint = {
-								enable = true,
-								setType = false,
-								paramType = true,
-								paramName = "Disable",
-								semicolon = "Disable",
-								arrayIndex = "Disable",
-							},
-						},
-					},
-				},
 				clangd = {
 					root_dir = function(fname)
 						return require("lspconfig.util").root_pattern(
@@ -51,6 +25,7 @@ return {
 					cmd = {
 						"clangd",
 						"--background-index",
+						"-std=c++20",
 						"--clang-tidy",
 						"--header-insertion=iwyu",
 						"--completion-style=detailed",
