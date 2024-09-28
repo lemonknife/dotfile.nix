@@ -50,4 +50,16 @@ return {
 			require("configs.lspconfig")(_, opts)
 		end,
 	},
+
+	{
+		"nvim-tree/nvim-tree.lua",
+		cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
+		dependencies = {
+			"stevearc/dressing.nvim",
+		},
+		opts = require("options.nvimtree"),
+		keys = {
+			{ "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
+		},
+	},
 }

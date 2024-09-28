@@ -203,7 +203,7 @@ return {
 						end,
 					},
 				},
-				extensions = { "neo-tree", "lazy" },
+				extensions = { "nvim-tree", "lazy" },
 			}
 
 			-- do not add trouble symbols if aerial is enabled
