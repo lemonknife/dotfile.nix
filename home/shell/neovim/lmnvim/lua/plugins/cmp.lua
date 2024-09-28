@@ -24,15 +24,28 @@ return {
 			local cmp = require("cmp")
 			local defaults = require("cmp.config.default")()
 			local auto_select = true
+			vim.api.nvim_set_hl(
+				0,
+				"NormalBorder",
+				{ fg = require("tokyonight.colors").setup().border_highlight, bg = nil }
+			)
 			return {
 				auto_brackets = {}, -- configure any filetype to auto add brackets
 				completion = {
 					completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
 				},
+
+				window = {
+					completion = cmp.config.window.bordered({
+						winhighlight = "Normal:Normal,FloatBorder:NormalBorder,CursorLine:PmenuSel,Search:None",
+						border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+						scrollbar = false,
+					}),
+				},
 				preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
 				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
+					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<C-Space>"] = cmp.mapping.complete(),
@@ -43,6 +56,29 @@ return {
 						cmp.abort()
 						fallback()
 					end,
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							-- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+							cmp.select_next_item()
+						elseif vim.snippet.active({ direction = 1 }) then
+							vim.schedule(function()
+								vim.snippet.jump(1)
+							end)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif vim.snippet.active({ direction = -1 }) then
+							vim.schedule(function()
+								vim.snippet.jump(-1)
+							end)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
@@ -139,26 +175,6 @@ return {
 				table.insert(opts.sources, { name = "snippets" })
 			end
 		end,
-		keys = {
-			{
-				"<Tab>",
-				function()
-					return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-				end,
-				expr = true,
-				silent = true,
-				mode = { "i", "s" },
-			},
-			{
-				"<S-Tab>",
-				function()
-					return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-				end,
-				expr = true,
-				silent = true,
-				mode = { "i", "s" },
-			},
-		},
 	},
 
 	-- comments
