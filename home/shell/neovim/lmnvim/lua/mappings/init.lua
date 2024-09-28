@@ -1,6 +1,6 @@
 local map = LazyVim.safe_keymap_set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+map("n", ";", ":", { desc = "CMD enter command mode", silent = false })
 
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
