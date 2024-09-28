@@ -3,6 +3,29 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		opts_extend = { "spec" },
+		opts = {
+			defaults = {},
+			spec = {
+				{
+					mode = { "n", "v" },
+					{ "<leader>l", group = "lsp" },
+					{ "<leader>f", group = "file/find" },
+					{ "<leader>g", group = "git" },
+					{ "<leader>gh", group = "hunks" },
+					{ "<leader>q", group = "quit/session" },
+					{ "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
+					{ "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+					{ "[", group = "prev" },
+					{ "]", group = "next" },
+					{ "g", group = "goto" },
+					{ "gs", group = "surround" },
+					{ "z", group = "fold" },
+					-- better descriptions
+					{ "gx", desc = "Open with system app" },
+				},
+			},
+		},
 	},
 
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
