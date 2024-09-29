@@ -6,6 +6,7 @@
     ./shell
     ./terminal
     ./dev
+    ./niri.nix
     inputs.agenix.homeManagerModules.default
     inputs.catppuccin.homeManagerModules.catppuccin
   ];
@@ -30,7 +31,6 @@
       accent = "dark";
     };
   };
-
 
   # Create symlink for wallpapers
   home.file."Pictures/Wallpapers".source = ./wallpaper;

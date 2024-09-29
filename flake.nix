@@ -10,6 +10,7 @@
     # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/master";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    niri.url = "github:sodiboo/niri-flake";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -58,6 +59,7 @@
       home-manager,
       nixos-cosmic,
       rust-overlay,
+      niri,
       ...
     }:
     {
@@ -95,9 +97,11 @@
             }
             nixos-cosmic.nixosModules.default
 
+            niri.nixosModules.niri
             {
               nixpkgs.overlays = [
                 rust-overlay.overlays.default
+                niri.overlays.niri
                 # (final: prev: {
                 #   # Replace unstable package with stable version
                 #   basedpyright = inputs.nixpkgs-nightly.legacyPackages.${prev.system}.basedpyright;
