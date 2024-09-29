@@ -17,6 +17,7 @@
     ./system-configuration.nix
     ./desktop-environment.nix
     ./system-program.nix
+    ./input-methods.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -68,7 +69,6 @@
   services.xserver.enable = true;
 
   services.xserver.displayManager.gdm.enable = false;
-  services.xserver.desktopManager.gnome.enable = false;
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
