@@ -1,6 +1,5 @@
 return {
 	{
-		-- Does not enable Mason
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {

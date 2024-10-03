@@ -35,6 +35,10 @@
 
       # sqlite
       sqlite
+
+      # Debugger
+      vscode-extensions.vadimcn.vscode-lldb
+      vscode-extensions.ms-python.debugpy
     ];
 
     defaultEditor = true;
@@ -46,4 +50,29 @@
     source = ./lmnvim;
     recursive = true;
   };
+
+  # Add debugger
+  xdg.configFile."nvim/lua/configs/rust.lua".text = ''
+    local configs = function(opts)
+      -- Update this path
+      local extension_path = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/"
+      local codelldb_path = extension_path .. 'adapter/codelldb'
+      local liblldb_path = extension_path .. 'lldb/lib/liblldb'
+      local this_os = vim.uv.os_uname().sysname;
+
+      liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
+
+      local cfg = require('rustaceanvim.config')
+
+      local config = {
+        dap = {
+          adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+        },
+      }
+
+      return vim.tbl_deep_extend("force", config, opts or {})
+    end
+
+    return configs
+  '';
 }

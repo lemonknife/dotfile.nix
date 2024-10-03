@@ -10,18 +10,6 @@ return {
 	},
 
 	{
-		"williamboman/mason.nvim",
-		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
-		opts = require("options.mason"),
-		config = function(_, opts)
-			if opts.ensure_installed then
-				vim.notify("\n   ensure_installed has been removed!", vim.log.levels.ERROR)
-			end
-			require("mason").setup(opts)
-		end,
-	},
-
-	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
 		build = ":TSUpdate",
