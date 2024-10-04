@@ -6,4 +6,3 @@ vim.api.nvim_set_hl(0, "NormalBorder", { fg = require("tokyonight.colors").setup
 
 vim.opt.relativenumber = true
 vim.opt.pumblend = 10
-vim.opt.winblend = 0

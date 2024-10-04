@@ -86,7 +86,7 @@ return {
 					fields = { "abbr", "kind", "menu" },
 
 					format = function(_, item)
-						local icon = LazyVim.config.icons.kinds[item.kind] or ""
+						local icon = require("options.icons").lspkind[item.kind] or ""
 
 						icon = " " .. icon .. " "
 						item.kind = string.format("%s %s", icon, item.kind or "")
