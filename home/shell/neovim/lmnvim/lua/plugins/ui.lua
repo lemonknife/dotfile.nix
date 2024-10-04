@@ -55,74 +55,6 @@ return {
 			local lualine_require = require("lualine_require")
 			lualine_require.require = require
 
-			local icons = {
-				misc = {
-					dots = "󰇘",
-				},
-				ft = {
-					octo = "",
-				},
-				dap = {
-					Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-					Breakpoint = " ",
-					BreakpointCondition = " ",
-					BreakpointRejected = { " ", "DiagnosticError" },
-					LogPoint = ".>",
-				},
-				diagnostics = {
-					Error = " ",
-					Warn = " ",
-					Hint = " ",
-					Info = " ",
-				},
-				git = {
-					added = " ",
-					modified = " ",
-					removed = " ",
-				},
-				kinds = {
-					Array = " ",
-					Boolean = "󰨙 ",
-					Class = " ",
-					Codeium = "󰘦 ",
-					Color = " ",
-					Control = " ",
-					Collapsed = " ",
-					Constant = "󰏿 ",
-					Constructor = " ",
-					Copilot = " ",
-					Enum = " ",
-					EnumMember = " ",
-					Event = " ",
-					Field = " ",
-					File = " ",
-					Folder = " ",
-					Function = "󰊕 ",
-					Interface = " ",
-					Key = " ",
-					Keyword = " ",
-					Method = "󰊕 ",
-					Module = " ",
-					Namespace = "󰦮 ",
-					Null = " ",
-					Number = "󰎠 ",
-					Object = " ",
-					Operator = " ",
-					Package = " ",
-					Property = " ",
-					Reference = " ",
-					Snippet = " ",
-					String = " ",
-					Struct = "󰆼 ",
-					TabNine = "󰏚 ",
-					Text = " ",
-					TypeParameter = " ",
-					Unit = " ",
-					Value = " ",
-					Variable = "󰀫 ",
-				},
-			}
-
 			vim.o.laststatus = vim.g.lualine_laststatus
 
 			local opts = {
@@ -140,10 +72,10 @@ return {
 						{
 							"diagnostics",
 							symbols = {
-								error = icons.diagnostics.Error,
-								warn = icons.diagnostics.Warn,
-								info = icons.diagnostics.Info,
-								hint = icons.diagnostics.Hint,
+								error = LazyVim.config.icons.diagnostics.Error,
+								warn = LazyVim.config.icons.diagnostics.Warn,
+								info = LazyVim.config.icons.diagnostics.Info,
+								hint = LazyVim.config.icons.diagnostics.Hint,
 							},
 						},
 						{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -177,9 +109,9 @@ return {
 						{
 							"diff",
 							symbols = {
-								added = icons.git.added,
-								modified = icons.git.modified,
-								removed = icons.git.removed,
+								added = LazyVim.config.icons.git.added,
+								modified = LazyVim.config.icons.git.modified,
+								removed = LazyVim.config.icons.git.removed,
 							},
 							source = function()
 								local gitsigns = vim.b.gitsigns_status_dict
@@ -227,6 +159,65 @@ return {
 			end
 
 			return opts
+		end,
+	},
+
+	-- This is what powers LazyVim's fancy-looking
+	-- tabs, which include filetype icons and close buttons.
+	{
+		"akinsho/bufferline.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+			{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+			{ "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+			{ "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+			{ "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+			{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+			{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+			{ "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+			{ "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+			{ "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
+			{ "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+		},
+		opts = {
+			options = {
+        -- stylua: ignore
+        close_command = function(n) LazyVim.ui.bufremove(n) end,
+        -- stylua: ignore
+        right_mouse_command = function(n) LazyVim.ui.bufremove(n) end,
+				diagnostics = "nvim_lsp",
+				always_show_bufferline = false,
+				diagnostics_indicator = function(_, _, diag)
+					local icons = LazyVim.config.icons.diagnostics
+					local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+						.. (diag.warning and icons.Warn .. diag.warning or "")
+					return vim.trim(ret)
+				end,
+				offsets = {
+					{
+						filetype = "nvim-tree",
+						text = "Nvim-tree",
+						highlight = "Directory",
+						text_align = "left",
+					},
+				},
+				---@param opts bufferline.IconFetcherOpts
+				get_element_icon = function(opts)
+					return LazyVim.config.icons.ft[opts.filetype]
+				end,
+			},
+		},
+		config = function(_, opts)
+			require("bufferline").setup(opts)
+			-- Fix bufferline when restoring a session
+			vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+				callback = function()
+					vim.schedule(function()
+						pcall(nvim_bufferline)
+					end)
+				end,
+			})
 		end,
 	},
 
@@ -289,7 +280,7 @@ return {
 						"help",
 						"alpha",
 						"dashboard",
-						"neo-tree",
+						"nvim-tree",
 						"Trouble",
 						"trouble",
 						"lazy",
