@@ -84,4 +84,11 @@ return {
 		event = "InsertEnter", -- Set the event to 'InsertCharPre' for better compatibility
 		priority = 1000,
 	},
+
+	{
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		branch = "v0.6",
+		opts = {},
+	},
 }
