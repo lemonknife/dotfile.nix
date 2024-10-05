@@ -10,22 +10,13 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 		},
-		-- Not all LSP servers add brackets when completing a function.
-		-- To better deal with this, LazyVim adds a custom option to cmp,
-		-- that you can configure. For example:
-		--
-		-- ```lua
-		-- opts = {
-		--   auto_brackets = { "python" }
-		-- }
-		-- ```
 		opts = function()
 			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 			local cmp = require("cmp")
 			local defaults = require("cmp.config.default")()
 			local auto_select = true
 			return {
-				auto_brackets = {}, -- configure any filetype to auto add brackets
+				auto_brackets = { "python" }, -- configure any filetype to auto add brackets
 				completion = {
 					completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
 				},
