@@ -44,36 +44,12 @@ return {
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<C-Space>"] = cmp.mapping.complete(),
-					["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
 					["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
 					["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					["<C-CR>"] = function(fallback)
 						cmp.abort()
 						fallback()
 					end,
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							-- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
-							cmp.select_next_item()
-						elseif vim.snippet.active({ direction = 1 }) then
-							vim.schedule(function()
-								vim.snippet.jump(1)
-							end)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif vim.snippet.active({ direction = -1 }) then
-							vim.schedule(function()
-								vim.snippet.jump(-1)
-							end)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
@@ -107,26 +83,75 @@ return {
 
 	-- snippets
 	{
-		"nvim-cmp",
+		"L3MON4D3/LuaSnip",
+		build = (not LazyVim.is_win())
+				and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+			or nil,
 		dependencies = {
 			{
-				"garymjr/nvim-snippets",
-				opts = {
-					friendly_snippets = true,
+				"rafamadriz/friendly-snippets",
+				config = function()
+					require("luasnip.loaders.from_vscode").lazy_load()
+				end,
+			},
+			{
+				"nvim-cmp",
+				dependencies = {
+					"saadparwaiz1/cmp_luasnip",
 				},
-				dependencies = { "rafamadriz/friendly-snippets" },
+				opts = function(_, opts)
+					local cmp = require("cmp")
+					local luasnip = require("luasnip")
+					opts.mapping = vim.tbl_extend("force", opts.mapping, {
+						["<CR>"] = cmp.mapping(function(fallback)
+							if cmp.core.view:visible() or vim.fn.pumvisible() == 1 then
+								LazyVim.create_undo()
+								if luasnip.expandable() then
+									luasnip.expand()
+								else
+									cmp.confirm({
+										behavior = cmp.ConfirmBehavior.Insert,
+										select = true,
+									})
+								end
+							else
+								fallback()
+							end
+						end),
+
+						["<Tab>"] = cmp.mapping(function(fallback)
+							if cmp.visible() then
+								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+							elseif luasnip.locally_jumpable(1) then
+								luasnip.jump(1)
+							else
+								fallback()
+							end
+						end, { "i", "s" }),
+
+						["<S-Tab>"] = cmp.mapping(function(fallback)
+							if cmp.visible() then
+								cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+							elseif luasnip.locally_jumpable(-1) then
+								luasnip.jump(-1)
+							else
+								fallback()
+							end
+						end, { "i", "s" }),
+					})
+					opts.snippet = {
+						expand = function(args)
+							require("luasnip").lsp_expand(args.body)
+						end,
+					}
+					table.insert(opts.sources, { name = "luasnip" })
+				end,
 			},
 		},
-		opts = function(_, opts)
-			opts.snippet = {
-				expand = function(item)
-					return LazyVim.cmp.expand(item.body)
-				end,
-			}
-			if LazyVim.has("nvim-snippets") then
-				table.insert(opts.sources, { name = "snippets" })
-			end
-		end,
+		opts = {
+			history = true,
+			delete_check_events = "TextChanged",
+		},
 	},
 
 	-- comments
