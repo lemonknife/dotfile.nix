@@ -7,6 +7,7 @@ local keys = {
 		desc = "Telescope open yank history",
 	},
 	{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
+	{ "Y", "<Plug>(YankyYank)$", mode = { "n", "x" }, desc = "Yank text after cursor" },
 	{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
 	{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put yanked text before cursor" },
 	{ "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after selection" },
