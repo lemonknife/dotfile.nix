@@ -29,7 +29,6 @@
 
       # Python LSP
       ruff
-      ruff-lsp
       basedpyright
       python3Full
 
