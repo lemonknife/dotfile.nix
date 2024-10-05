@@ -7,6 +7,7 @@
     ./terminal
     ./dev
     ./niri.nix
+    ./program
     inputs.agenix.homeManagerModules.default
     inputs.catppuccin.homeManagerModules.catppuccin
   ];
