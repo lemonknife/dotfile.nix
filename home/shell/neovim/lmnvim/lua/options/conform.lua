@@ -28,6 +28,7 @@ local options = {
     cpp = { "clang-format" },
     c = { "clang-format" },
     nix = { "nixfmt" },
+    python = { "ruff_organize_imports", "ruff_format" },
   },
 
   format_on_save = function(bufnr)
