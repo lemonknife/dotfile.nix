@@ -21,6 +21,9 @@ local options = {
     stylua = {
       prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
     },
+    rustfmt = {
+      prepend_args = { "--config", "imports_granularity=Module,group_imports=StdExternalCrate" },
+    },
   },
 
   formatters_by_ft = {
@@ -29,6 +32,7 @@ local options = {
     c = { "clang-format" },
     nix = { "nixfmt" },
     python = { "ruff_organize_imports", "ruff_format" },
+    rust = { "rustfmt" },
   },
 
   format_on_save = function(bufnr)
