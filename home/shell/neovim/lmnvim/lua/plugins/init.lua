@@ -1,5 +1,4 @@
-LazyVim = require("lazyvim.util")
-LazyVim.config = require("lazyvim.config")
+require("lazyvim.config")
 
 return {
   "nvim-lua/plenary.nvim",
