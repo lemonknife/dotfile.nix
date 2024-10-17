@@ -71,4 +71,43 @@ return {
     branch = "v0.6",
     opts = {},
   },
+
+  {
+    "akinsho/toggleterm.nvim",
+    config = true,
+    version = "*",
+    cmd = { "ToggleTerm", "TermExec" },
+    keys = {
+      { "<leader>tt", "<Cmd>ToggleTerm direction=float<CR>", desc = "ToggleTerm float" },
+      {
+        "<Leader>th",
+        "<Cmd>ToggleTerm size=20 direction=horizontal<CR>",
+        desc = "ToggleTerm horizontal split",
+      },
+      { "<Leader>tv", "<Cmd>ToggleTerm size=70 direction=vertical<CR>", desc = "ToggleTerm vertical split" },
+    },
+    opts = {
+      on_open = function(term)
+        vim.cmd.startinsert()
+        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+      end,
+      -- function to run on closing the terminal
+      on_close = function(term)
+        vim.cmd.startinsert()
+      end,
+      shade_terminals = false,
+      float_opts = { border = "rounded" },
+      highlights = {
+        Normal = { link = "NormalFloat" },
+        NormalNC = { link = "NormalFloat" },
+        NormalFloat = { link = "NormalFloat" },
+        FloatBorder = { link = "FloatBorder" },
+        StatusLine = { link = "StatusLine" },
+        StatusLineNC = { link = "StatusLineNC" },
+        WinBar = { link = "WinBar" },
+        WinBarNC = { link = "WinBarNC" },
+      },
+      size = 10,
+    },
+  },
 }

@@ -16,6 +16,7 @@ return {
           { "<leader>q", group = "quit/session" },
           { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
           { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+          { "<leader>t", group = "terminal" },
           { "[", group = "prev" },
           { "]", group = "next" },
           { "g", group = "goto" },
@@ -135,7 +136,7 @@ return {
             end,
           },
         },
-        extensions = { "nvim-tree", "lazy" },
+        extensions = { "nvim-tree", "lazy", "toggleterm" },
       }
 
       -- do not add trouble symbols if aerial is enabled
