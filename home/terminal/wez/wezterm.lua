@@ -7,9 +7,11 @@ config.color_scheme = "Tokyo Night Moon"
 
 config.font_size = 16
 config.font = wez.font_with_fallback({
-	{ family = "CaskaydiaCove Nerd Font Propo", weight = "Regular" },
-	"FiraCode",
-	{ family = "LXGW WenKai Mono", weight = "Bold" },
+  { family = "CaskaydiaCove Nerd Font Propo", weight = "Regular" },
+  "Noto Sans Canadian Aboriginal",
+  "DejaVu Serif",
+  "Noto Sans CJK SC",
+  "FiraCode",
 })
 
 -- Fix the issue of render characters as block

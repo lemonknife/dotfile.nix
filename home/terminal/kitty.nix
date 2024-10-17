@@ -15,6 +15,7 @@
       tab_bar_edge = "top";
       tab_bar_style = "powerline";
       tab_powerline_style = "slanted";
+      symbol_map = "U+15dc Noto Sans Canadian Aboriginal\nsymbol_map U+1d17 DejaVu Serif";
     };
     themeFile = "tokyo_night_moon";
   };
