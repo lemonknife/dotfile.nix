@@ -14,6 +14,7 @@
         "$git_status"
         "[ ](fg:#394260 bg:#212736)"
         "$c"
+        "$conda"
         "$lua"
         "$java"
         "$nix_shell"
@@ -65,9 +66,10 @@
         format = "[[$symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
       };
       conda = {
-        symbol = "";
+        symbol = "🅒";
+        ignore_base = false;
         style = "bg:#212736";
-        format = "[[$symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[$symbol ($environment) ](fg:#769ff0 bg:#212736)]($style)";
       };
       crystal = {
         symbol = "";
@@ -220,7 +222,7 @@
         format = "[[$symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
       };
       rust = {
-        symbol = "";
+        symbol = "";
         style = "bg:#212736";
         format = "[[$symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
       };
