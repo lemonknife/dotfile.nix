@@ -8,7 +8,8 @@
         set fish_greeting
 
         # enable micromamba
-        eval "$(micromamba shell hook --shell fish)"
+        export MAMBA_ROOT_PREFIX=~/micromamba
+        eval "$(micromamba shell hook -s fish)"
       ''
     ];
     plugins = [
