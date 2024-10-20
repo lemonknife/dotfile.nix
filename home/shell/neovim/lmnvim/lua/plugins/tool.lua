@@ -81,7 +81,7 @@ return {
       { "<leader>tt", "<Cmd>ToggleTerm direction=float<CR>", desc = "ToggleTerm float" },
       {
         "<Leader>th",
-        "<Cmd>ToggleTerm size=20 direction=horizontal<CR>",
+        "<Cmd>ToggleTerm size=15 direction=horizontal<CR>",
         desc = "ToggleTerm horizontal split",
       },
       { "<Leader>tv", "<Cmd>ToggleTerm size=70 direction=vertical<CR>", desc = "ToggleTerm vertical split" },
