@@ -6,12 +6,14 @@
     clock24 = true;
     baseIndex = 1;
     terminal = "tmux-256color";
-    customPaneNavigationAndResize = true;
     prefix = "C-a";
     escapeTime = 0;
-    reverseSplit = true;
     extraConfig = builtins.concatStringsSep "\n" [
       (builtins.readFile "${inputs.tokyonight}/extras/tmux/tokyonight_moon.tmux")
+      ''
+        bind -N "Split the pane into two, left and right" v split-window -h
+        bind -N "Split the pane into two, top and bottom" h split-window -v
+      ''
     ];
     plugins = with pkgs; [
       {
