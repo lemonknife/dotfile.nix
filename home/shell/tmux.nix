@@ -5,15 +5,16 @@
     keyMode = "vi";
     clock24 = true;
     baseIndex = 1;
-    terminal = "tmux-256color";
+    terminal = "xterm-256color";
     prefix = "C-a";
     escapeTime = 0;
     extraConfig = builtins.concatStringsSep "\n" [
-      (builtins.readFile "${inputs.tokyonight}/extras/tmux/tokyonight_moon.tmux")
       ''
         bind -N "Split the pane into two, left and right" v split-window -h
         bind -N "Split the pane into two, top and bottom" h split-window -v
+        set -as terminal-features ",xterm-256color:RGB"
       ''
+      (builtins.readFile "${inputs.tokyonight}/extras/tmux/tokyonight_moon.tmux")
     ];
     plugins = with pkgs; [
       {
