@@ -49,6 +49,9 @@
       git_status = {
         style = "bg:#394260";
         format = "[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)";
+        ahead = "↑$count";
+        diverged = "↑$ahead_count↓$behind_count";
+        behind = "↓$count";
       };
       aws = {
         symbol = "";
