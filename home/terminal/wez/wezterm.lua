@@ -15,7 +15,14 @@ config.font = wez.font_with_fallback({
 })
 
 -- Fix the issue of render characters as block
-config.front_end = "WebGpu"
+for _, gpu in ipairs(wez.gui.enumerate_gpus()) do
+  if gpu.backend == "Vulkan" and gpu.device_type == "DiscreteGpu" then
+    config.webgpu_preferred_adapter = gpu
+    config.front_end = "WebGpu"
+    config.webgpu_power_preference = "HighPerformance"
+    break
+  end
+end
 
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true

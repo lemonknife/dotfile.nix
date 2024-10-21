@@ -18,6 +18,7 @@
     ./desktop-environment.nix
     ./system-program.nix
     ./input-methods.nix
+    ./graphics.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
