@@ -1,5 +1,6 @@
 return {
 
+  -- Hint UI for keymaps
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -29,14 +30,14 @@ return {
     },
   },
 
+  -- UI dependencies
   { "nvim-tree/nvim-web-devicons", lazy = true },
+  { "MunifTanjim/nui.nvim", lazy = true },
 
   {
     "folke/tokyonight.nvim",
     opts = { style = "moon" },
   },
-
-  { "MunifTanjim/nui.nvim", lazy = true },
 
   {
     "nvim-lualine/lualine.nvim",
@@ -226,40 +227,7 @@ return {
     end,
   },
 
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Dismiss All Notifications",
-      },
-    },
-    opts = {
-      stages = "static",
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-      on_open = function(win)
-        vim.api.nvim_win_set_config(win, { zindex = 100 })
-      end,
-    },
-    init = function()
-      -- when noice is not enabled, install notify on VeryLazy
-      if not LazyVim.has("noice.nvim") then
-        LazyVim.on_very_lazy(function()
-          vim.notify = require("notify")
-        end)
-      end
-    end,
-  },
-
+  -- Indent highlight
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "User FilePost",
@@ -300,6 +268,7 @@ return {
     main = "ibl",
   },
 
+  -- Notifications
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -341,11 +310,45 @@ return {
       require("noice").setup(opts)
     end,
   },
+  {
+    "rcarriga/nvim-notify",
+    keys = {
+      {
+        "<leader>un",
+        function()
+          require("notify").dismiss({ silent = true, pending = true })
+        end,
+        desc = "Dismiss All Notifications",
+      },
+    },
+    opts = {
+      stages = "static",
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+      on_open = function(win)
+        vim.api.nvim_win_set_config(win, { zindex = 100 })
+      end,
+    },
+    init = function()
+      -- when noice is not enabled, install notify on VeryLazy
+      if not LazyVim.has("noice.nvim") then
+        LazyVim.on_very_lazy(function()
+          vim.notify = require("notify")
+        end)
+      end
+    end,
+  },
 
+  -- Todo comments
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
-    event = "LazyFile",
+    event = "User FilePost",
     opts = {},
     keys = {
       {
@@ -363,6 +366,16 @@ return {
         desc = "Previous Todo Comment",
       },
       { "<leader>xt", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+    },
+  },
+
+  -- Add highlight for colors
+  {
+    "brenoprata10/nvim-highlight-colors",
+    event = "User FilePost",
+    opts = {
+      virtual_symbol = "⬤",
+      render = "virtual",
     },
   },
 }
