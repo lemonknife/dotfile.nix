@@ -43,6 +43,12 @@
       repo = "starship.yazi";
       flake = false;
     };
+    fuse-archive-yazi = {
+      type = "github";
+      owner = "lemonknife";
+      repo = "fuse-archive.yazi";
+      flake = false;
+    };
     fish-ssh-agent = {
       type = "github";
       owner = "danhper";

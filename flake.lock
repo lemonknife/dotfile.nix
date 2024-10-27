@@ -182,6 +182,22 @@
         "type": "github"
       }
     },
+    "fuse-archive-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729998567,
+        "narHash": "sha256-tXj+cg56bWywHeeFias8hbLoIf2h5DEqivtP3660tN8=",
+        "owner": "lemonknife",
+        "repo": "fuse-archive.yazi",
+        "rev": "22ad77b118ee61df38ac51b3f64bd48a24b52480",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lemonknife",
+        "repo": "fuse-archive.yazi",
+        "type": "github"
+      }
+    },
     "git-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -560,6 +576,7 @@
         "agenix": "agenix",
         "catppuccin": "catppuccin",
         "fish-ssh-agent": "fish-ssh-agent",
+        "fuse-archive-yazi": "fuse-archive-yazi",
         "grub2-themes": "grub2-themes",
         "home-manager": "home-manager_2",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
