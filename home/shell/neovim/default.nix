@@ -35,6 +35,10 @@
       # sqlite
       sqlite
 
+      # Java LSP
+      jdt-language-server
+      google-java-format
+
       # Debugger
       vscode-extensions.vadimcn.vscode-lldb
       vscode-extensions.ms-python.debugpy
@@ -73,5 +77,10 @@
     end
 
     return configs
+  '';
+
+  xdg.configFile."nvim/lua/options/java.lua".text = ''
+    local lombok_path = "${pkgs.lombok.out}/share/java/lombok.jar"
+    return lombok_path
   '';
 }

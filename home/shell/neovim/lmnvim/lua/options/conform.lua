@@ -33,6 +33,7 @@ local options = {
     nix = { "nixfmt" },
     python = { "ruff_organize_imports", "ruff_format" },
     rust = { "rustfmt" },
+    java = { "google-java-format" },
   },
 
   format_on_save = function(bufnr)
