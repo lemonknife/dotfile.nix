@@ -20,6 +20,7 @@ in
     enable = true;
     userName = "lemonknife";
     userEmail = "lemonife@protonmail.com";
+    extraConfig.init.defaultBranch = "main";
     includes = [ { path = config.age.secrets.gitconfig.path; } ];
   };
 
