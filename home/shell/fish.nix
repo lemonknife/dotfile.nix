@@ -26,6 +26,7 @@
 
   programs.eza = {
     enable = true;
+    icons = "auto";
     enableBashIntegration = false;
     enableZshIntegration = false;
     enableFishIntegration = false;
