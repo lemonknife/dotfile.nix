@@ -56,6 +56,12 @@
       repo = "fish-ssh-agent";
       flake = false;
     };
+    fifc = {
+      type = "github";
+      owner = "gazorby";
+      repo = "fifc";
+      flake = false;
+    };
     agenix.url = "github:ryantm/agenix";
   };
 

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   programs.fish = {
     enable = true;
@@ -17,6 +17,29 @@
         name = "fish-ssh-agent";
         src = inputs.fish-ssh-agent;
       }
+      {
+        name = "fifc";
+        src = inputs.fifc;
+      }
     ];
   };
+
+  programs.eza = {
+    enable = true;
+    enableBashIntegration = false;
+    enableZshIntegration = false;
+    enableFishIntegration = false;
+    enableIonIntegration = false;
+    enableNushellIntegration = false;
+  };
+
+  xdg.configFile."eza/theme.yml".source = "${inputs.tokyonight}/extras/eza/tokyonight.yml";
+
+  home.packages = [
+    pkgs.file
+    pkgs.chafa
+    pkgs.hexyl
+    pkgs.procs
+    pkgs.broot
+  ];
 }
