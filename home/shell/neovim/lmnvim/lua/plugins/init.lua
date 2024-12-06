@@ -1,64 +1,112 @@
-require("lazyvim.config")
+-- Terminal Mappings
+local function term_nav(dir)
+	---@param self snacks.terminal
+	return function(self)
+		return self:is_floating() and "<c-" .. dir .. ">" or vim.schedule(function()
+			vim.cmd.wincmd(dir)
+		end)
+	end
+end
+
+require("lazyvim.config").init()
 
 return {
-  "nvim-lua/plenary.nvim",
 
-  {
-    "stevearc/conform.nvim",
-    event = "BufWritePre",
-    opts = require("options.conform"),
-  },
+	{ import = "lazyvim.plugins.ui" },
 
-  {
-    "nvim-treesitter/nvim-treesitter",
-    version = false,
-    build = ":TSUpdate",
-    event = { "VeryLazy" },
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    init = function(plugin)
-      -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-      -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-      -- no longer trigger the **nvim-treesitter** module to be loaded in time.
-      -- Luckily, the only things that those plugins need are the custom queries, which we make available
-      -- during startup.
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
-    end,
-    opts = require("options.treesitter"),
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
+	{ "folke/lazy.nvim", version = "*" },
+	{
+		"LazyVim/LazyVim",
+		priority = 10000,
+		lazy = false,
+		opts = {
+			defaults = {
+				keymaps = false,
+			},
+		},
+		cond = true,
+		version = "*",
+	},
 
-  {
-    "neovim/nvim-lspconfig",
-    event = "User FilePost",
-    opts = require("options.lspconfig"),
-    dependencies = {
-      "stevearc/dressing.nvim",
-    },
-    config = function(_, opts)
-      require("configs.lspconfig")(_, opts)
-    end,
-  },
-
-  {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
-    dependencies = {
-      "stevearc/dressing.nvim",
-      opts = {
-        input = {
-          win_options = {
-            winblend = 10,
-            winhighlight = "Normal:Normal,FloatBorder:NormalBorder,CursorLine:PmenuSel,Search:None",
-          },
-        },
-      },
-    },
-    opts = require("options.nvimtree"),
-    keys = {
-      { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
-    },
-  },
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		opts = function()
+			---@type snacks.Config
+			return {
+				bigfile = { enabled = true },
+				notifier = { enabled = true },
+				quickfile = { enabled = true },
+				words = { enabled = true },
+				toggle = { map = LazyVim.safe_keymap_set },
+				statuscolumn = { enabled = false }, -- we set this in options.lua
+				terminal = {
+					win = {
+						keys = {
+							nav_h = { "<C-h>", term_nav("h"), desc = "Go to Left Window", expr = true, mode = "t" },
+							nav_j = { "<C-j>", term_nav("j"), desc = "Go to Lower Window", expr = true, mode = "t" },
+							nav_k = { "<C-k>", term_nav("k"), desc = "Go to Upper Window", expr = true, mode = "t" },
+							nav_l = { "<C-l>", term_nav("l"), desc = "Go to Right Window", expr = true, mode = "t" },
+						},
+					},
+				},
+				dashboard = {
+					preset = {
+						header = [[
+	                                                                     
+	       ████ ██████           █████      ██                     
+	      ███████████             █████                             
+	      █████████ ███████████████████ ███   ███████████   
+	     █████████  ███    █████████████ █████ ██████████████   
+	    █████████ ██████████ █████████ █████ █████ ████ █████   
+	  ███████████ ███    ███ █████████ █████ █████ ████ █████  
+	 ██████  █████████████████████ ████ █████ █████ ████ ██████ 
+            ]],
+						---@type snacks.dashboard.Item[]
+						keys = {
+							{
+								icon = " ",
+								key = "f",
+								desc = "Find File",
+								action = ":lua Snacks.dashboard.pick('files')",
+							},
+							{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+							{
+								icon = " ",
+								key = "w",
+								desc = "Find Text",
+								action = ":lua Snacks.dashboard.pick('live_grep')",
+							},
+							{
+								icon = " ",
+								key = "r",
+								desc = "Recent Files",
+								action = ":lua Snacks.dashboard.pick('oldfiles')",
+							},
+							{
+								icon = " ",
+								key = "c",
+								desc = "Config",
+								action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+							},
+							{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
+							{ icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" },
+							{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+							{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+						},
+					},
+				},
+			}
+		end,
+		keys = {
+			{
+				"<leader>un",
+				function()
+					Snacks.notifier.hide()
+				end,
+				desc = "Dismiss All Notifications",
+			},
+		},
+	},
 }

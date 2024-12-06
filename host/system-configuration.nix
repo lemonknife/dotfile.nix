@@ -55,12 +55,8 @@
   };
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-        "CascadiaCode"
-      ];
-    })
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.fira-code
     lxgw-wenkai
     noto-fonts
     noto-fonts-extra
