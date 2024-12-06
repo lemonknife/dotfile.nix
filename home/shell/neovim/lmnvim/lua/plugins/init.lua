@@ -12,8 +12,6 @@ require("lazyvim.config").init()
 
 return {
 
-	{ import = "lazyvim.plugins.ui" },
-
 	{ "folke/lazy.nvim", version = "*" },
 	{
 		"LazyVim/LazyVim",
