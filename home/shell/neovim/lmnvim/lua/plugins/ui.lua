@@ -1,9 +1,3 @@
-local separators = {
-	left = { "", "" },
-	right = { " ", "" }, -- separator for the right side of the statusline
-	tab = { "", "" },
-}
-
 return {
 	-- tokyonight
 	{
@@ -20,16 +14,58 @@ return {
 		init = function()
 			vim.g.heirline_laststatus = vim.o.laststatus
 			if vim.fn.argc(-1) > 0 then
-				vim.o.statusline = " "
+				vim.o.statusline = ""
 			else
 				vim.o.laststatus = 0
 			end
 		end,
 		dependencies = {
-			"Zeioth/heirline-components.nvim",
+			"lemonknife/heirline-components.nvim",
 			opts = {
 				icons = {
-					VimIcon = "",
+					VimIcon = "",
+				},
+				separators = {
+					left = { "", "" },
+					right = { " ", "" }, -- separator for the right side of the statusline
+					tab = { "", "" },
+				},
+
+				modes = {
+					["n"] = { "NORMAL", "normal" },
+					["no"] = { "OP", "normal" },
+					["nov"] = { "OP", "normal" },
+					["noV"] = { "OP", "normal" },
+					["no"] = { "OP", "normal" },
+					["niI"] = { "NORMAL", "normal" },
+					["niR"] = { "NORMAL", "normal" },
+					["niV"] = { "NORMAL", "normal" },
+					["i"] = { "INSERT", "insert" },
+					["ic"] = { "INSERT", "insert" },
+					["ix"] = { "INSERT", "insert" },
+					["t"] = { "TERM", "terminal" },
+					["nt"] = { "TERM", "terminal" },
+					["v"] = { "VISUAL", "visual" },
+					["vs"] = { "VISUAL", "visual" },
+					["V"] = { "LINES", "visual" },
+					["Vs"] = { "LINES", "visual" },
+					[""] = { "BLOCK", "visual" },
+					["s"] = { "BLOCK", "visual" },
+					["R"] = { "REPLACE", "replace" },
+					["Rc"] = { "REPLACE", "replace" },
+					["Rx"] = { "REPLACE", "replace" },
+					["Rv"] = { "V-REPLACE", "replace" },
+					["s"] = { "SELECT", "visual" },
+					["S"] = { "SELECT", "visual" },
+					[""] = { "BLOCK", "visual" },
+					["c"] = { "COMMAND", "command" },
+					["cv"] = { "COMMAND", "command" },
+					["ce"] = { "COMMAND", "command" },
+					["r"] = { "PROMPT", "inactive" },
+					["rm"] = { "MORE", "inactive" },
+					["r?"] = { "CONFIRM", "inactive" },
+					["!"] = { "SHELL", "inactive" },
+					["null"] = { "null", "inactive" },
 				},
 			},
 		},
@@ -75,15 +111,15 @@ return {
 						lib.component.mode({
 							-- enable mode text with padding as well as an icon before it
 							mode_text = {
-								icon = { padding = { right = 1, left = 1 } },
+								icon = { kind = "VimIcon", padding = { left = 1, right = 1 } },
 							},
 							-- surround the component with a separators
 							surround = {
 								-- it's a left element, so use the left separator
-								separator = separators.left,
+								separator = "left",
 								-- set the color of the surrounding based on the current mode using astronvim.utils.status module
 								color = function()
-									return { main = lib.hl.mode_bg(), right = "dark5" }
+									return { main = lib.hl.mode_bg(), right = "blue" }
 								end,
 							},
 						}),
@@ -92,8 +128,8 @@ return {
 							-- define the surrounding separator and colors to be used inside of the component
 							-- and the color to the right of the separated out section
 							surround = {
-								separator = separators.left,
-								color = { main = "dark5", right = "bg_visual" },
+								separator = "left",
+								color = { main = "blue", right = "bg_visual" },
 							},
 						}),
 						lib.component.file_info({
@@ -106,7 +142,7 @@ return {
 							padding = { right = 1 },
 							-- define the section separator
 							surround = {
-								separator = separators.left,
+								separator = "left",
 								color = { main = "bg_visual" },
 								condition = false,
 							},
@@ -118,12 +154,10 @@ return {
 						lib.component.git_diff(),
 						lib.component.diagnostics(),
 						lib.component.fill(),
-						lib.component.cmd_info(),
-						lib.component.fill(),
-						lib.component.lsp(),
-						lib.component.compiler_state(),
+						lib.component.lsp({ lsp_progress = false }),
 						lib.component.virtual_env(),
 						lib.component.nav(),
+						lib.component.mode({ surround = { separator = "right" } }),
 					},
 				},
 			}
