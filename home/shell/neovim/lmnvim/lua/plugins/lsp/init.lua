@@ -2,7 +2,7 @@ return {
 	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
-		event = "User FilePost",
+		event = "LazyFile",
 		opts = function()
 			---@class PluginLspOpts
 			local ret = {
