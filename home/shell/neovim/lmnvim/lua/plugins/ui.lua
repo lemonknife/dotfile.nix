@@ -30,6 +30,12 @@ return {
 					GitChange = "",
 					GitDelete = "",
 					FolderClosed = "",
+					BufferClose = "󰅖",
+					FileModified = "",
+					FileReadOnly = "",
+					ArrowLeft = "",
+					ArrowRight = "",
+					TabClose = "󰅙",
 				},
 				separators = {
 					left = { "", "" },
@@ -98,6 +104,108 @@ return {
 							}, args.buf)
 						return is_disabled
 					end,
+				},
+				tabline = { -- UI upper bar
+					lib.component.tabline_conditional_padding(),
+					require("heirline.utils").make_buflist( -- bufferlist
+						require("heirline.utils").surround({ "", "" }, function(self)
+							return lib.heirline.tab_type(self) .. "_bg"
+						end, {
+							condition = function(self)
+								return require("heirline-components.buffer").is_valid(self.bufnr)
+							end,
+							init = function(self)
+								self.tab_type = lib.heirline.tab_type(self)
+							end,
+							on_click = { -- add clickable component to each buffer
+								callback = function(_, minwid)
+									vim.api.nvim_win_set_buf(0, minwid)
+								end,
+								minwid = function(self)
+									return self.bufnr
+								end,
+								name = "heirline_tabline_buffer_callback",
+							},
+
+							{ -- add buffer picker functionality to each buffer
+								condition = function(self)
+									return self._show_picker
+								end,
+								update = false,
+								init = function(self)
+									if not (self.label and self._picker_labels[self.label]) then
+										local bufname = lib.provider.filename()(self)
+										local label = bufname:sub(1, 1)
+										local i = 2
+										while label ~= " " and self._picker_labels[label] do
+											if i > #bufname then
+												break
+											end
+											label = bufname:sub(i, i)
+											i = i + 1
+										end
+										self._picker_labels[label] = self.bufnr
+										self.label = label
+									end
+								end,
+								provider = function(self)
+									return lib.provider.str({
+										str = self.label,
+										padding = { left = 1, right = 1 },
+									})
+								end,
+								hl = lib.hl.get_attributes("buffer_picker"),
+							},
+							lib.component.file_info({
+								file_icon = {
+									condition = function(self)
+										return not self._show_picker
+									end,
+									hl = lib.hl.file_icon("tabline"),
+								},
+								filename = {},
+								filetype = false,
+								file_modified = {
+									padding = { left = 1, right = 1 },
+									condition = lib.condition.is_file,
+									hl = function(self)
+										return lib.hl.get_attributes(self.tab_type .. "_modified")
+									end,
+								},
+								unique_path = {
+									hl = function(self)
+										return lib.hl.get_attributes(self.tab_type .. "_path")
+									end,
+								},
+								close_button = {
+									hl = function(self)
+										return lib.hl.get_attributes(self.tab_type .. "_close")
+									end,
+									padding = { left = 1, right = 1 },
+									on_click = {
+										callback = function(_, minwid)
+											require("heirline-components.buffer").close(minwid)
+										end,
+										minwid = function(self)
+											return self.bufnr
+										end,
+										name = "heirline_tabline_close_buffer_callback",
+									},
+								},
+								padding = { left = 1, right = 1 },
+								hl = function(self)
+									local tab_type = self.tab_type
+									if self._show_picker and self.tab_type ~= "buffer_active" then
+										tab_type = "buffer_visible"
+									end
+									return lib.hl.get_attributes(tab_type)
+								end,
+								surround = false,
+							}),
+						})
+					),
+					lib.component.fill({ hl = { bg = "tabline_bg" } }),
+					lib.component.tabline_tabpages(),
 				},
 				statusline = {
 					fallthrough = false,
