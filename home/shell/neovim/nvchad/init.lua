@@ -16,10 +16,31 @@ local lazy_config = require "configs.lazy"
 -- load plugins
 require("lazy").setup({
   {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {},
+    config = function(_, opts)
+      local notify = vim.notify
+      require("snacks").setup(opts)
+      -- HACK: restore vim.notify after snacks setup and let noice.nvim take over
+      -- this is needed to have early notifications show up in noice history
+      if LazyVim.has "noice.nvim" then
+        vim.notify = notify
+      end
+    end,
+  },
+
+  {
     "NvChad/NvChad",
     lazy = false,
     branch = "v2.5",
     import = "nvchad.plugins",
+  },
+
+  {
+    "LazyVim/LazyVim",
+    lazy = true,
   },
 
   { import = "plugins" },
@@ -29,9 +50,9 @@ require("lazy").setup({
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
-require "options"
-require "nvchad.autocmds"
+require "configs.options"
+require "configs.autocmds"
 
 vim.schedule(function()
-  require "mappings"
+  require "configs.mappings"
 end)
