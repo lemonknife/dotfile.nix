@@ -3,6 +3,10 @@
 
   nixConfig = {
     extra-substituters = [ "https://nix-community.cachix.org" ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
   };
 
   inputs = {
@@ -61,6 +65,10 @@
       owner = "gazorby";
       repo = "fifc";
       flake = false;
+    };
+    wezterm = {
+      url = "github:wez/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
   };
