@@ -24,6 +24,31 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
+      views = {
+        cmdline_popup = {
+          border = {
+            style = "solid",
+          },
+          win_options = {
+            winhighlight = {
+              Normal = "NoiceNormalFloat",
+              FloatBorder = "NoiceFloatBorder",
+            },
+          },
+        },
+        cmdline_popupmenu = {
+          border = {
+            style = "solid",
+          },
+          scrollbar = false,
+          win_options = {
+            winhighlight = {
+              Normal = "NoicePopupNormal",
+              FloatBorder = "NoicePopupFloatBorder",
+            },
+          },
+        },
+      },
       lsp = {
         progress = {
           enabled = false,

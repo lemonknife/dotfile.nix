@@ -17,6 +17,29 @@ M.base46 = {
     Comment = { italic = true },
     ["@comment"] = { link = "Comment" },
   },
+
+  hl_add = {
+    NoiceNormalFloat = { fg = "white", bg = "black2" },
+    NoiceFloatBorder = { fg = "black2", bg = "black2" },
+    NoiceCmdlineIcon = { fg = "red", bg = "black2" },
+
+    NoicePopupNormal = { bg = "darker_black" },
+    NoicePopupFloatBorder = { fg = "darker_black", bg = "darker_black" },
+    NoicePopupmenuBorder = { link = "NoicePopupFloatBorder" },
+
+    NoiceFloatTitle = { fg = "black", bg = "red" },
+    NoiceCmdlinePopupTitle = { link = "NoiceFloatTitle" },
+    NoiceCmdlinePopupTitleLua = { link = "NoiceCmdlinePopupTitle" },
+    NoiceCmdlinePopupTitleCalculator = { link = "NoiceCmdlinePopupTitle" },
+    NoiceCmdlinePopupTitleCmdline = { link = "NoiceCmdlinePopupTitle" },
+    NoiceCmdlinePopupTitleFilter = { link = "NoiceCmdlinePopupTitle" },
+    NoiceCmdlinePopupTitleHelp = { link = "NoiceCmdlinePopupTitle" },
+    NoiceCmdlinePopupTitleIncRename = { link = "NoiceCmdlinePopupTitle" },
+    NoiceCmdlinePopupTitleInput = { link = "NoiceCmdlinePopupTitle" },
+
+    NoicePopupmenuMatch = { bg = "one_bg", fg = "blue" },
+    NoicePopupmenuSelected = { bg = "black2", fg = "white" },
+  },
 }
 
 M.ui = {
