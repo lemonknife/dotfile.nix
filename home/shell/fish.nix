@@ -7,6 +7,8 @@
       ''
         set fish_greeting
 
+        alias lmnvim="NVIM_APPNAME=lmnvim nvim"
+
         # enable micromamba
         export MAMBA_ROOT_PREFIX=~/micromamba
         eval "$(micromamba shell hook -s fish)"
@@ -29,7 +31,7 @@
     icons = "auto";
     enableBashIntegration = false;
     enableZshIntegration = false;
-    enableFishIntegration = false;
+    enableFishIntegration = true;
     enableIonIntegration = false;
     enableNushellIntegration = false;
   };

@@ -36,6 +36,17 @@ return {
             },
           },
         },
+        cmdline_input = {
+          border = {
+            style = "solid",
+          },
+          win_options = {
+            winhighlight = {
+              Normal = "NoiceNormalFloat",
+              FloatBorder = "NoiceFloatBorder",
+            },
+          },
+        },
         cmdline_popupmenu = {
           border = {
             style = "solid",

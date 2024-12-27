@@ -54,6 +54,11 @@
     recursive = true;
   };
 
+  xdg.configFile.lmnvim = {
+    source = ./lmnvim;
+    recursive = true;
+  };
+
   # Add debugger
   xdg.configFile."nvim/lua/configs/rust.lua".text = ''
     local configs = function(opts)
@@ -79,7 +84,7 @@
     return configs
   '';
 
-  xdg.configFile."nvim/lua/options/java.lua".text = ''
+  xdg.configFile."nvim/lua/configs/java.lua".text = ''
     local lombok_path = "${pkgs.lombok.out}/share/java/lombok.jar"
     return lombok_path
   '';

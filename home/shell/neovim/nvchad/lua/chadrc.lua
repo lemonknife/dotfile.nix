@@ -39,6 +39,8 @@ M.base46 = {
 
     NoicePopupmenuMatch = { bg = "one_bg", fg = "blue" },
     NoicePopupmenuSelected = { bg = "black2", fg = "white" },
+
+    BlinkCmpGhostText = { fg = "light_grey" },
   },
 }
 
@@ -55,6 +57,16 @@ M.ui = {
           return ""
         end
         path = LazyVim.norm(path)
+
+        local icon, icon_hl = require("nvim-web-devicons").get_icon(path)
+        if icon == nil then
+          icon = ""
+        end
+        if icon_hl ~= nil then
+          icon_hl = "%#" .. icon_hl .. "# "
+        else
+          icon_hl = ""
+        end
 
         local root = LazyVim.root.get { normalize = true }
         local cwd = LazyVim.root.cwd()
@@ -78,7 +90,7 @@ M.ui = {
           dir = " " .. table.concat({ unpack(parts, 1, #parts - 1) }, sep) .. sep
         end
 
-        return "%#Comment#" .. dir .. "%#Bold#" .. parts[#parts]
+        return icon_hl .. icon .. "%#Comment#" .. dir .. "%#Bold#" .. parts[#parts]
       end,
       root = function()
         local icon = "󰉋 "
