@@ -6,6 +6,10 @@ local options = {
     "html",
     "css",
     "cpp",
+    "c",
+    "nix",
+    "fish",
+    "rust",
     "python",
   },
 }
