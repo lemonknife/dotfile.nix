@@ -70,6 +70,10 @@
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty-pkg = {
+      url = "github:ghostty-org/ghostty";
+    };
+    ghostty.url = "github:clo4/ghostty-hm-module";
     agenix.url = "github:ryantm/agenix";
   };
 

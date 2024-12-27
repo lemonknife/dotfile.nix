@@ -10,6 +10,7 @@
     ./program
     inputs.agenix.homeManagerModules.default
     inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.ghostty.homeModules.default
   ];
 
   age.secrets.gitconfig.file = ../secret/gitconfig-secret.age;
