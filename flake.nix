@@ -29,7 +29,7 @@
     };
     grub2-themes.url = "github:vinceliuice/grub2-themes";
     catppuccin.url = "github:catppuccin/nix";
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     tokyonight = {
       type = "github";
       owner = "folke";
