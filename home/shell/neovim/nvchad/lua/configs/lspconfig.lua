@@ -25,11 +25,16 @@ local function safe_require(module_name)
   end
 end
 
+local has_blink, blink = pcall(require, "blink.cmp")
+
+local capabilities =
+  vim.tbl_deep_extend("force", {}, nvlsp.capabilities, has_blink and blink.get_lsp_capabilities() or {})
+
 for _, lsp in ipairs(servers) do
   local server_config = {
     on_attach = on_attach,
     on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
+    capabilities = capabilities,
   }
 
   for k, v in pairs(safe_require("configs.lsp." .. lsp)) do
