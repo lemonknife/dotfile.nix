@@ -5,7 +5,8 @@
   ...
 }:
 {
-  xdg.configFile."yazi/tokyonight_moon.tmTheme".source = "${inputs.tokyonight}/extras/sublime/tokyonight_moon.tmTheme";
+  xdg.configFile."yazi/tokyonight_moon.tmTheme".source =
+    "${inputs.tokyonight}/extras/sublime/tokyonight_moon.tmTheme";
 
   home.packages = with pkgs; [
     p7zip

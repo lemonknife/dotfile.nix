@@ -8,6 +8,6 @@
     clang
     clang-tools
     bear
-    openjdk11
+    jdk11
   ];
 }
