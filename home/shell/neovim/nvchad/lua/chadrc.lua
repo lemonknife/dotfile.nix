@@ -69,6 +69,8 @@ M.base46 = {
     SnacksNotifierFooterTrace = { fg = "purple" },
     SnacksIndent = { fg = "line" },
     SnacksIndentScope = { fg = "grey" },
+
+    TabuflineOffSet = { fg = "blue", bg = "darker_black", bold = true, italic = true },
   },
 }
 
@@ -134,6 +136,29 @@ M.ui = {
 
         name = (name:match "([^/\\]+)[/\\]*$" or name) .. " "
         return (vim.o.columns > 85 and ("%#St_cwd_text#" .. name .. "%#St_file_sep#" .. sep_r)) or ""
+      end,
+    },
+  },
+  tabufline = {
+    order = { "offSets", "buffers", "tabs", "btns" },
+    modules = {
+      offSets = function()
+        local function getNvimTreeWidth()
+          for _, win in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+            if vim.bo[vim.api.nvim_win_get_buf(win)].ft == "NvimTree" then
+              return vim.api.nvim_win_get_width(win) + 1
+            end
+          end
+          return 0
+        end
+        local function addPadding(str, length)
+          local padding = length - #str
+          if padding < 0 then
+            return string.rep(" ", length)
+          end
+          return string.rep(" ", math.floor(padding / 2)) .. str .. string.rep(" ", math.ceil(padding / 2))
+        end
+        return "%#TabuflineOffSet#" .. addPadding("Nvim Tree", getNvimTreeWidth())
       end,
     },
   },
