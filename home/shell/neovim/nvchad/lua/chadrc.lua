@@ -118,7 +118,7 @@ M.ui = {
           dir = " " .. table.concat({ unpack(parts, 1, #parts - 1) }, sep) .. sep
         end
 
-        return icon_hl .. icon .. "%#Comment#" .. dir .. "%#Bold#" .. parts[#parts]
+        return icon_hl .. icon .. "%#Comment#" .. dir .. "%#@markup.strong#" .. parts[#parts]
       end,
       root = function()
         local icon = "󰉋 "
